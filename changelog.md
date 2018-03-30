@@ -1,8 +1,12 @@
+0.1.4-A
+- Removed 'agent' role throughout.
+
+
 0.1.3
 - Update role descriptions of Agent as a type of processor and clarified agent responsibility to send callbacks when requests are distributed
 - Updated flow diagram to include communication from controller to data subject
 - Added status of 'distributed' to represent that an Agent has sent a request downstream to all parties.
-- Clarified that this is a 'specification' and not a 'standard'
+- Clarified that this is a 'specification' and not a 'standard' nor a 'framework'
 - Updated summary doc to match changes above
 - Added an 'OpenGDPR for Lawyers' document aiming to clarify frequent legal questions about OpenGDPR
 
