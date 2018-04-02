@@ -5,6 +5,7 @@ Changelog
 - Removed 'GDPR for Lawyers' document that is no longer needed
 - Removed IETF text at the top of the specification. This is a specification and not a standard so the IETF format is not needed.
 
+0.1.3
 - Update role descriptions of Agent as a type of processor and clarified agent responsibility to send callbacks when requests are distributed
 - Updated flow diagram to include communication from controller to data subject
 - Added status of 'distributed' to represent that an Agent has sent a request downstream to all parties.
