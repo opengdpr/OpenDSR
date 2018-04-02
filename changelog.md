@@ -1,4 +1,10 @@
-0.1.3
+Changelog
+
+0.1.4
+- Removed 'agent' role throughout and added a Best Practice to use a sub-processor to distribute requests and ensure mature infrastructure (retries, security verifications & logging)
+- Removed 'GDPR for Lawyers' document that is no longer needed
+- Removed IETF text at the top of the specification. This is a specification and not a standard so the IETF format is not needed.
+
 - Update role descriptions of Agent as a type of processor and clarified agent responsibility to send callbacks when requests are distributed
 - Updated flow diagram to include communication from controller to data subject
 - Added status of 'distributed' to represent that an Agent has sent a request downstream to all parties.
