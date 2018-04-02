@@ -1,6 +1,6 @@
-OpenGDPR, an open specification for data subject request federation and result
-                               reporting
-                             Version 0.1.4
+OpenGDPR, an open specification for data subject request management
+Version 0.1.4
+
 Abstract
 This document defines a common specification for Data Controllers and Processors to
 build interoperable systems for tracking and honoring Data Subject Rights requests
