@@ -1,41 +1,14 @@
 OpenGDPR, an open specification for data subject request federation and result
                                reporting
-                             Version 0.1.3
-Status of this Memo
-This Internet Draft is submitted in full conformance with the provisions of BCP 78
-and BCP 79. This document may not be modified, and derivative works of it may not
-be created, except to publish it as an RFC and to translate it into languages
-other than English.
-
-Internet Drafts are working documents of the Internet Engineering Task Force
-(IETF), its areas, and its working groups.  Note that other groups may also
-distribute working documents as Internet Drafts.
-Internet Drafts are draft documents valid for a maximum of six months and may be
-updated, replaced, or obsoleted by other documents at any time.  It is
-inappropriate to use Internet Drafts as reference material or to cite them other
-than as "work in progress."
-
-The list of current Internet Drafts can be accessed at
-http://www.ietf.org/ietf/1id abstracts.txt
-
-The list of Internet Draft Shadow Directories can be accessed at
-http://www.ietf.org/shadow.html
-This Internet Draft will expire on September 1 2018.
-Copyright Notice
-Copyright (c) 2018 IETF Trust and the persons identified as the document authors.
-All rights reserved.
-
-This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating
-to IETF Documents (http://trustee.ietf.org/license info) in effect on the date of
-publication of this document. Please review these documents carefully, as they
-describe your rights and restrictions with respect to this document.
+                             Version 0.1.4
 Abstract
 This document defines a common specification for Data Controllers and Processors to
 build interoperable systems for tracking and honoring Data Subject Rights requests
 to support the accountability principle as defined under the General Data
 Protection Regulation (GDPR).
+
 It defines roles, responsibilities, objects and protocols that Data Controllers
-and Processors can utilize to distribute, fulfil and report the status of a range
+and Processors can utilize to distribute, fulfill and report the status of a range
 of Data Subject request types.
 
 For more information on the Data Subject Rights, see chapter 3 of the GDPR
@@ -57,7 +30,7 @@ This specification does not cover:
 It is the responsibility of each Data Controller and Data Processor to interpret and
 apply the GDPR to honor Data Subject requests (Chapter 3).
 2. The protocol for communications between Controllers and Data Subjects.
-3. The protocol for communications between Controllers, Processors and Supervisory
+3. The protocol for communications between Controllers or Processors and Supervisory
 Authorities.
 4. The protocol for communication of the results of an access or portability request.
 
@@ -72,21 +45,30 @@ Global Unique Identifiers (GUID) MUST be lowercase and v4 format.
 Data Subject Request
   A request from a Data Subject exercising their Data Subject Rights as
 defined within the GDPR under Chapter 3.
+
 Fulfillment
   Enacting compliance related activities to honor an OpenGDPR request.
 
 3. OpenGDPR Basics
 
 3.1. Roles and Responsibilities
+Data Subject
+  A European Union resident whose personal data is being processed.
+
 Data Controller
+  An entity which makes the decision about what personal data  will be processed
+   and the types of processing that will be done with respect to that personal data.
   The Data Controller receives Data Subject requests from the Data Subjects
   and validates them. The Data Controller SHOULD provide a callback
   endpoint. The Data Controller SHOULD verify response signatures.
   Referenced as “Controller”.
+
 Data Processor
+  The organization that processes data pursuant to the instructions of the Controller
+  on behalf of the Controller. The Data Processor receives data subject requests via
+  RESTful endpoints and is responsible for fulfilling requests.
   The Data Processor MUST provide a signed response to requests. The Data
-  Processor MUST honor callbacks. The Data Processor receives requests via
-  RESTful endpoints and fulfills the request. Data Processors MUST honor
+  Processor MUST honor callbacks.  Data Processors MUST honor
   callbacks included in requests. Processors MUST provide the following
   endpoints: /discovery, /status, /opengdpr_requests. Referenced as
   “Processor”.
@@ -104,18 +86,17 @@ Data Processor
 |     |        |     |         |     |
 |     |        |     |         |     |
 |     |        |     |         |     |
-|     | <-(F)- |     | <--(E)- |     |
+|     | <-(E)- |     | <--(D)- |     |
 +-----+        +-----+         +-----+
 Data          Controller      Processor
 Subject
 					Figure 1. Request Sequence Flow
 The flow illustrated in Figure 1 includes the following steps:
-A. New data subject request submitted to the Controller
+A. A new data subject request submitted to the Controller
 B. Controller verifies the request and submits it to Processors
 C. Processor fulfills request
 D. Processor reports status to the Controller via callbacks
-E. Processor completes fulfillment of request
-F. Controller reports back to the Data Subject
+E. Controller reports back to the Data Subject
 
 3.3.  Transport
 Whenever Transport Layer Security (TLS) is used by this specification, the
@@ -133,8 +114,7 @@ callback.
 
 4.2. Signing
 Digital signatures MUST be generated and validated according to the Digital
-Signature Standard FIPS PUB 186 4
-https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186 4.pdf
+Signature Standard FIPS PUB 186-4: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-4.pdf
 
 4.3.  Authentication
 API authentication for OpenGDPR requests is out of scope for this document, and
@@ -159,7 +139,7 @@ microsoft_publisher_id
 roku_publisher_id
 roku_aid
 
-5.2.  Identity Object
+5.2. Identity Object
 An OpenGDPR request MUST contain one or more Identity objects used to fulfill
 the request.
 identity_type
@@ -171,7 +151,6 @@ identity_value
 identity_format
   REQUIRED string value representing the encoding of the identity
   Supported values: "raw", "sha256", "sha1", "md5"
-
 
 6. OpenGDPR Discovery
 
@@ -190,7 +169,6 @@ api_version
 supported_identities
   REQUIRED array of "identity_type" and "identity_format" pairs.
 supported_subject_request_types
-
    REQUIRED array of "subject_request_type" strings.
 processor_certificate
   REQUIRED HTTP endpoint x.509 where certificate used to sign callbacks and
@@ -232,7 +210,6 @@ subject_request_type
 subject_identities
   REQUIRED array of Identity objects as specified in section 4.1.1.
 submitted_time
-
    REQUIRED RFC 3339 date string representing the time of the original
   request by the data subject.
 api_version
@@ -264,14 +241,14 @@ Content Type: application/json
 "api_version":"0.1",
 "property_id":"123456",
 "status_callback_urls":[
-  "https://example controller.com/opengdpr_callbacks"
+  "https://examplecontroller.com/opengdpr_callbacks"
 ] }
+
 7.3.  OpenGDPR Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 201, it MUST  and the following parameters:
 expected_completion_time
-
-   REQUIRED RFC 3339 date string representing the time when the
+  REQUIRED RFC 3339 date string representing the time when the
   Processor expects to fulfill the request.
 received_time
   REQUIRED RFC 3339 date string representing the time when the
@@ -340,7 +317,6 @@ Pragma: no cache
 }] }
 }
 
-
 8. OpenGDPR Status
 OpenGDPR requests MUST have an associated status. The following request statuses
 are supported:
@@ -357,15 +333,17 @@ subject_request_id.
 GET /opengdpr_request/a7551968 d5d6 44b2 9831 815ac9017798 HTTP/1.1
 Host: example processor.com
 Accept: application/json
+
 8.3.  Status Response Properties
 The Status response MUST include the following headers:
-X OpenGDPR Processor Domain
-  REQUIRED header   representing the domain for which the signing
+X-OpenGDPR-Processor-Domain
+  REQUIRED header representing the domain for which the signing
   certificate is issued. The domain name MUST match the domain on which
   OpenGDPR requests are received.
-X OpenGDPR Signature
-  REQUIRED header   Base64 encoded signature generated by a certificate
+X-OpenGDPR-Signature
+  REQUIRED header Base64 encoded signature generated by a certificate
   matching the domain in the X OpenGDPR Processor Domain header.
+
 The Status body MUST include the following properties:
 controller_id
   REQUIRED string indicating the unique identity of the Controller in the
@@ -393,14 +371,13 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example processor id",
+"controller_id":"example controller id",
 "expected_completion_time":"2018 11 01T15:00:01Z",
-
 "subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
 "request_status":"pending"
 }
 
-8.5.  Request Status Callback
+8.5. Request Status Callback
 OpenGDPR requests SHOULD contain status_callback_urls (see section 6.1). The
 following rules govern their use:
    All included callbacks MUST be invoked by the Processor on request state
@@ -413,14 +390,14 @@ following rules govern their use:
   Controllers.
    Controllers SHOULD authenticate the validity of the callback.
 
-8.6.  Callback Request
+8.6. Callback Request
 Callbacks MUST include the following headers:
-X OpenGDPR Processor Domain
-  REQUIRED header   representing the domain for which the signing
+X-OpenGDPR-Processor-Domain
+  REQUIRED header representing the domain for which the signing
   certificate is issued. The domain name MUST match the domain on which
   OpenGDPR requests are received.
-X OpenGDPR Signature
-  REQUIRED header   Base64 encoded signature generated by a certificate
+X-OpenGDPR-Signature
+  REQUIRED header Base64 encoded signature generated by a certificate
   matching the domain in the X OpenGDPR Processor Domain header.
 The callback body MUST include the following parameters:
 controller_id
@@ -433,11 +410,9 @@ subject_request_id
 request_status
   REQUIRED string indicating the status of the identity request.
 expected_completion_time
+  REQUIRED RFC 3339 date string representing the time when the Processor expects to fulfill the request.
 
-   REQUIRED RFC 3339 date string representing the time when the
-  Processor expects to fulfill the request.
-
-8.7.  Callback Request Example
+8.7. Callback Request Example
 POST /opengdpr_callbacks HTTP/1.1
 Host: example controller.com
 Content Type: application/json
@@ -460,10 +435,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 "request_status":"pending"
 }
 
-8.8.  Callback Authentication
-
-
-9.
+8.8. Callback Authentication
 In order to authenticate a callback, a Party SHOULD perform the following actions:
 1. Read the X OpenGDPR Processor Domain request header.
 2. Fetch the public key from a cache based on identity.
@@ -480,16 +452,16 @@ check fails.
 OpenGDPR Cancellations
 OpenGDPR requests MAY be canceled by the Controller while in status "pending".
 
-9.1.  Cancellation Endpoint
+9.  Cancellation Endpoint
 OpenGDPR endpoints MUST accept request cancellations via an HTTP DELETE for the
 subject_request_id.
 
-9.2.  Example Cancellation Request
+9.1.  Example Cancellation Request
 DELETE /opengdpr_request/a7551968 d5d6 44b2 9831 815ac9017798 HTTP/1.1
 Host: example processor.com
 Accept: application/json
 
-9.3.  Cancellation Response Properties
+9.2.  Cancellation Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 202, and the following parameters:
 received_time
@@ -503,7 +475,7 @@ processor_signature
   REQUIRED Base64 encoded signature of the SHA 256 digest of the body of the
   response.
 
-9.4.  Example OpenGDPR Response
+9.3.  Example OpenGDPR Response
 HTTP/1.1 202 Accepted
 Content Type: application/json
 X OpenGDPR Processor Domain: example processor.com
@@ -525,6 +497,10 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 
 10.   Best Practices
 All Parties MUST make best efforts to not throttle during normal operation.
+
+Controllers SHOULD use a sub-processor to manage their OpenGDPR request infrastructure
+to ensure requests are distributed reliably, security signatures are verified and
+thorough logs are kept.
 
 11.   Security Considerations
 The intention of this specification is to improve data subject privacy by making it
