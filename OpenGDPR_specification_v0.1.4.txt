@@ -229,9 +229,9 @@ Host: example processor.com
 Accept: application/json
 Content Type: application/json
 {
-"subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
 "subject_request_type":"erasure",
-"submitted_time":"2018 10 02T15:00:00Z",
+"submitted_time":"2018-10-02T15:00:00Z",
 "subject_identities":[
   {
      "identity_type":"email",
@@ -277,9 +277,9 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
 "received_time":"2018 10 02T15:00:01Z",
-"expected_completion_time":"2018 11 01T15:00:01Z",
+"expected_completion_time":"2018-11-01T15:00:01Z",
 "encoded_request":"<BASE64 ENCODED REQUEST>"
 }
 
@@ -324,13 +324,14 @@ are supported:
   Processor.
 2. in_progress: indicates that a request is currently being acted on. Processors SHOULD indicate this request if possible.
 3. completed: indicates that a request has been fulfilled.
+4. cancelled: indicates that a request has been cancelled.
 
 8.1.  Request Status Endpoint
 OpenGDPR endpoints MUST be queryable for request status via an HTTP GET for the
 subject_request_id.
 
 8.2.  Example Status Request
-GET /opengdpr_request/a7551968 d5d6 44b2 9831 815ac9017798 HTTP/1.1
+GET /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example processor.com
 Accept: application/json
 
@@ -371,9 +372,9 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example controller id",
-"expected_completion_time":"2018 11 01T15:00:01Z",
-"subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+"controller_id":"example_controller_id",
+"expected_completion_time":"2018-11-01T15:00:01Z",
+"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
 "request_status":"pending"
 }
 
@@ -414,7 +415,7 @@ expected_completion_time
 
 8.7. Callback Request Example
 POST /opengdpr_callbacks HTTP/1.1
-Host: example controller.com
+Host: examplecontroller.com
 Content Type: application/json
 X OpenGDPR Processor Domain: example processor.com
 X OpenGDPR Signature:
@@ -429,9 +430,9 @@ jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
 "controller_id":"example processor id",
-"expected_completion_time":"2018 11 01T15:00:01Z",
-"status_callback_url":"https://example controller.com/opengdpr_callbacks",
-"subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+"expected_completion_time":"2018-11-01T15:00:01Z",
+"status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
+"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
 "request_status":"pending"
 }
 
@@ -450,14 +451,14 @@ validation function.
 6. Verify the status_callback_url matches the Party's own endpoint. Return if this
 check fails.
 OpenGDPR Cancellations
-OpenGDPR requests MAY be canceled by the Controller while in status "pending".
+OpenGDPR requests MAY be cancelled by the Controller while in status "pending".
 
 9.  Cancellation Endpoint
 OpenGDPR endpoints MUST accept request cancellations via an HTTP DELETE for the
 subject_request_id.
 
 9.1.  Example Cancellation Request
-DELETE /opengdpr_request/a7551968 d5d6 44b2 9831 815ac9017798 HTTP/1.1
+DELETE /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example processor.com
 Accept: application/json
 
@@ -490,7 +491,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
 "received_time":"2018 10 02T15:00:01Z",
 "encoded_request":"<BASE64 ENCODED REQUEST>"
 }
