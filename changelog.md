@@ -6,6 +6,7 @@ Changelog
 - Removed IETF text at the top of the specification. This is a specification and not a standard so the IETF format is not needed.
 - Corrected restful noun to "opengdpr_requests"
 - Added status 'cancelled' as the ending status for cancelled requests
+- Added versions to all API endpoints
 
 0.1.3
 - Update role descriptions of Agent as a type of processor and clarified agent responsibility to send callbacks when requests are distributed
