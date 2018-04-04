@@ -140,6 +140,7 @@ roku_publisher_id
 roku_advertising_id
 
 5.2 Identity Formats
+The following identity formats are supported:
 raw
 sha1
 md5
@@ -169,6 +170,7 @@ Host: example processor.com
 Accept: application/json
 
 6.2. Subject Request Types
+The following subject request types are supported:
 access
 portability
 erasure
@@ -190,20 +192,22 @@ processor_certificate
 HTTP/1.1 200 OK
 Content Type: application/json
 {
-"api_version":"0.1",
-"supported_identities":[
-  {
-     "identity_type":"email",
-     "identity_format":"raw"
-  },
-  {
-     "identity_type":"email",
-     "identity_format":"sha256"
-} ],
-"supported_subject_request_types”:["erasure"],
-"processor_certificate":"https://example processor.com/cert.pem"
+ "api_version": "0.1",
+ "supported_identities": [
+   {
+     "identity_type": "email",
+     "identity_format": "raw"
+   },
+   {
+     "identity_type": "email",
+     "identity_format": "sha256"
+   }
+ ],
+ "supported_subject_request_types": [
+   "erasure"
+ ],
+ "processor_certificate": "https://exampleprocessor.com/cert.pem"
 }
-
 
 7. OpenGDPR Request
 
@@ -239,25 +243,26 @@ Host: example processor.com
 Accept: application/json
 Content Type: application/json
 {
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"subject_request_type":"erasure",
-"submitted_time":"2018-10-02T15:00:00Z",
-"subject_identities":[
-  {
-     "identity_type":"email",
-     "identity_value":"johndoe@example.com",
-     "identity_format":"raw"
-} ],
-"api_version":"0.1",
-"property_id":"123456",
-"status_callback_urls":[
-  "https://examplecontroller.com/opengdpr_callbacks"
-]
+  "subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
+  "subject_request_type": "erasure",
+  "submitted_time": "2018-10-02T15:00:00Z",
+  "subject_identities": [
+    {
+      "identity_type": "email",
+      "identity_value": "johndoe@example.com",
+      "identity_format": "raw"
+    }
+  ],
+  "api_version": "0.1",
+  "property_id": "123456",
+  "status_callback_urls": [
+    "https://examplecontroller.com/opengdpr_callbacks"
+  ]
 }
 
 7.3.  OpenGDPR Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
-code 201, it MUST include the following parameters:
+code 201 and it MUST include the following parameters:
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the
   Processor expects to fulfill the request.
@@ -322,9 +327,9 @@ Pragma: no cache
 "code": 400,
 "message": "subject_request_id field is required",
 "errors": [{
-  "domain": "Validation",
-  "reason": "IllegalArgumentException",
-  "message": "subject_request_id field is required."
+ "domain": "Validation",
+ "reason": "IllegalArgumentException",
+ "message": "subject_request_id field is required."
 }] }
 }
 
@@ -366,11 +371,10 @@ expected_completion_time
 subject_request_id
   REQUIRED UUID v4 string matching the original OpenGDPR request.
 request_status
-  REQUIRED string indicating the status of the request.
+  REQUIRED string indicating the status of the request as defined in section 8.
 api_version
-  OPTIONAL Version string representing the desired version of the OpenGDPR
-  API
-  
+  OPTIONAL Version string representing the desired version of the OpenGDPR API
+
 8.4.  Example Status Response
 HTTP/1.1 200 OK
 Content Type: application/json
@@ -401,7 +405,7 @@ following rules govern their use:
    Processors MUST try to send callbacks at least once. It is recommended but
   not required to retry callbacks when they have failed.
    Controllers SHOULD make all reasonable effort towards a reliable callback
-  system
+  system.
    Processors SHOULD monitor for failed callback requests and notify affected
   Controllers.
    Controllers SHOULD authenticate the validity of the callback.
@@ -424,7 +428,7 @@ status_callback_url
 subject_request_id
   REQUIRED UUID v4 string matching the original OpenGDPR request.
 request_status
-  REQUIRED string indicating the status of the identity request. See section 8.
+  REQUIRED string indicating the status of the request. See section 8.
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the Processor expects to fulfill the request.
 
@@ -465,12 +469,12 @@ validation function.
 5. Return 403 if validation fails.
 6. Verify the status_callback_url matches the Party's own endpoint. Return if this
 check fails.
-OpenGDPR Cancellations
-OpenGDPR requests MAY be cancelled by the Controller while in status "pending".
 
 9.  Cancellation Endpoint
 OpenGDPR endpoints MUST accept request cancellations via an HTTP DELETE for the
-subject_request_id.
+subject_request_id. OpenGDPR requests MAY be cancelled by the Controller while
+ in status "pending".
+
 
 9.1.  Example Cancellation Request
 DELETE /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
