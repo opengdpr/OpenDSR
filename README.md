@@ -79,9 +79,9 @@ Non-Restful endpoints:
 Refer to the full specification for definitions of objects and fields.
 ```
 {
- "subject_request_id":"a7551968 d5d6 44b2 9831 815ac9017798",
+ "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
  "subject_request_type":"erasure",
- "submitted_time":"2018 10 02T15:00:00Z",
+ "submitted_time":"2018-10-02T15:00:00Z",
  "subject_identities":[
    {
       "identity_type":"email",
