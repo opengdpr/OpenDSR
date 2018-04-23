@@ -63,7 +63,6 @@ Restful API endpoints for the resource “opengdpr_requests”:
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
 | POST | opengdpr_requests/ | Create a new OpenGDPR request | Yes |
-| GET | opengdpr_requests/ | Retrieve status of all OpenGDPR request | Yes |
 | GET | opengdpr_requests/{RequestId} | Retrieve status of a single OpenGDPR request | Yes |
 | PUT | opengdpr_requests/{RequestId} | - | No, requests cannot be updated after being created |
 | DELETE | opengdpr_requests/{RequestId} | Cancel an OpenGDPR request | Yes, cancellation is valid in status “pending” only |
