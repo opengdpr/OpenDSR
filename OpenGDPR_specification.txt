@@ -70,7 +70,7 @@ Data Processor
   The Data Processor MUST provide a signed response to requests. The Data
   Processor MUST honor callbacks.  Data Processors MUST honor
   callbacks included in requests. Processors MUST provide the following
-  endpoints: /discovery, /status, /opengdpr_requests. Referenced as
+  endpoints on the same subdomain or domain: /discovery, /status, /opengdpr_requests. Referenced as
   “Processor”.
 
 
@@ -148,7 +148,7 @@ sha256
 
 5.3. Identity Object
 An OpenGDPR request MUST contain one or more Identity objects used to fulfill
-the request.
+the request. An OpenGDPR request MUST NOT contain more than one value for a single identity_type.
 identity_type
   REQUIRED string value representing the form of identity.
   Supported values: See section 5.1.
@@ -166,7 +166,7 @@ support for the OpenGDPR specification via HTTP GET.
 
 6.1.  Example Discovery Request
 GET /discovery HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 6.2. Subject Request Types
@@ -239,7 +239,7 @@ status_callback_urls
 
 7.2.  Example OpenGDPR Request
 POST /opengdpr_requests HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 Content Type: application/json
 {
@@ -281,7 +281,7 @@ processor_signature
 7.4.  Example OpenGDPR Response
 HTTP/1.1 201 Created
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -348,7 +348,7 @@ subject_request_id.
 
 8.2.  Example Status Request
 GET /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 8.3.  Status Response Properties
@@ -378,7 +378,7 @@ api_version
 8.4.  Example Status Response
 HTTP/1.1 200 OK
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -436,7 +436,7 @@ expected_completion_time
 POST /opengdpr_callbacks HTTP/1.1
 Host: examplecontroller.com
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -478,7 +478,7 @@ subject_request_id. OpenGDPR requests MAY be cancelled by the Controller while
 
 9.1.  Example Cancellation Request
 DELETE /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 9.2.  Cancellation Response Properties
@@ -502,7 +502,7 @@ api_version
 9.3.  Example OpenGDPR Response
 HTTP/1.1 202 Accepted
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
