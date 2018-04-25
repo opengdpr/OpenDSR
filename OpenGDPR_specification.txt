@@ -281,7 +281,7 @@ processor_signature
 7.4.  Example OpenGDPR Response
 HTTP/1.1 201 Created
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -378,7 +378,7 @@ api_version
 8.4.  Example Status Response
 HTTP/1.1 200 OK
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -436,7 +436,7 @@ expected_completion_time
 POST /opengdpr_callbacks HTTP/1.1
 Host: examplecontroller.com
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -502,7 +502,7 @@ api_version
 9.3.  Example OpenGDPR Response
 HTTP/1.1 202 Accepted
 Content Type: application/json
-X-OpenGDPR-Processor Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
