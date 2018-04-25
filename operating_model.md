@@ -23,6 +23,7 @@ People interact with OpenGDPR via two types participation:
 
 ## Working Group
 This is an open specification, there are no limits to who can implement or who can apply to be in the Working Group (including competitors of any existing members). The Working Group is composed of:
+- Up to 20 people
 - Up to 10 companies, each who can contribute up to 2 participants. Individual contributors are also welcome.
 - Participants are encouraged to be from product, engineering and privacy/legal/compliance roles as the content is technical.
 - Companies are favored in spaces heavily driven by personal data and affected by the GDPR: analytics, marketing, publishing, with a strong EU-presence
