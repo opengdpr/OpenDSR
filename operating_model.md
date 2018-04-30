@@ -23,9 +23,8 @@ People interact with OpenGDPR via two types participation:
 
 ## Working Group
 This is an open specification, there are no limits to who can implement or who can apply to be in the Working Group (including competitors of any existing members). The Working Group is composed of:
-- Working Group is composed of mParticle, AppsFlyer, Braze and Amplitude.
+- Working Group is composed of members from mParticle, AppsFlyer, Braze and Amplitude.
 - Participants are encouraged to be from product, engineering and privacy/legal/compliance roles as the content is technical.
-- Companies are favored in spaces heavily driven by personal data and affected by the GDPR: analytics, marketing, publishing, with a strong EU-presence
 
 ### What is expected of working group members?
 The Working Group drives the OpenGDPR initiative:
@@ -47,7 +46,7 @@ The Working Group drives the OpenGDPR initiative:
 A few simple rules will help keep the project running and the repo clean:
 - The repo is the truth, anything left unpublished hasn’t actually happened yet
 - Goal of responding to new issues within 3 days
-- Normal & small pull requests require 2 members to approve before they are accepted
+- Normal pull requests require 2 members to approve before they are accepted
 - Large pull requests require 3 members to approve before being accepted
 - Most conversation around issues and pull requests should happen publicly in GitHub
 - If consensus cannot be reached via discussion, members are encouraged to collaborate offline and update the discussion threads afterwards
