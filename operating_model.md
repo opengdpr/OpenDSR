@@ -23,8 +23,7 @@ People interact with OpenGDPR via two types participation:
 
 ## Working Group
 This is an open specification, there are no limits to who can implement or who can apply to be in the Working Group (including competitors of any existing members). The Working Group is composed of:
-- Up to 20 people
-- Up to 10 companies, each who can contribute up to 2 participants. Individual contributors are also welcome.
+- Working Group is composed of mParticle, AppsFlyer, Braze and Amplitude.
 - Participants are encouraged to be from product, engineering and privacy/legal/compliance roles as the content is technical.
 - Companies are favored in spaces heavily driven by personal data and affected by the GDPR: analytics, marketing, publishing, with a strong EU-presence
 
@@ -37,11 +36,11 @@ The Working Group drives the OpenGDPR initiative:
 - Building support for OpenGDPR into your products
 - Champion the OpenGDPR initiative in your day-to-day discussions
 
-### How are new members added?
-- New members must be proposed and receive 50% support from existing working group members
+### How are new working group members added?
+- New members must be proposed and receive 75% support from existing working group members
 - New members must be judged on the positive contributions and domain knowledge, not on existing biases or marketplace influences (competition)
 
-### How do members leave?
+### How do working group members leave?
 - Existing members may elect to resign their membership or may be remove due to inactivity.
 
 ## Specification Updates
