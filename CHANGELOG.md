@@ -1,4 +1,9 @@
 Changelog
+0.1.5
+- Added processor specific identity types of processor_name_id, eg. mparticle_id, intended for situations without a common id in use.
+- Fixed typos and missing '-'
+- Clarified that endpoints must be on the same (sub)domain and it must match both the certificate and the X-OpenGDPR-Processor-Domain header.
+- Removed the request type of 'rectification' from the readme as it's not in scope yet.
 
 0.1.4
 - Removed 'agent' role throughout and added a Best Practice to use a sub-processor to distribute requests and ensure mature infrastructure (retries, security verifications & logging)
