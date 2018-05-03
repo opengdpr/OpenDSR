@@ -1,5 +1,5 @@
 OpenGDPR, an open specification for data subject request management
-Version 0.1.4
+Version 0.1.5
 
 Abstract
 This document defines a common specification for Data Controllers and Processors to
@@ -53,7 +53,7 @@ Fulfillment
 
 3.1. Roles and Responsibilities
 Data Subject
-  A European Union resident whose personal data is being processed.
+  A data subject as defined by the GDPR.
 
 Data Controller
   An entity which makes the decision about what personal data  will be processed
@@ -70,7 +70,7 @@ Data Processor
   The Data Processor MUST provide a signed response to requests. The Data
   Processor MUST honor callbacks.  Data Processors MUST honor
   callbacks included in requests. Processors MUST provide the following
-  endpoints: /discovery, /status, /opengdpr_requests. Referenced as
+  endpoints on a single domain/subdomain: /discovery, /status, /opengdpr_requests. Referenced as
   “Processor”.
 
 
@@ -110,7 +110,7 @@ that meet an individual party’s (e.g. Controller or Processor) security requir
 4.1. Certificates
 Digital certificates used in this protocol MUST be issued by a trusted
 certificate authority and MUST be issued to the organization issuing the
-callback.
+callback. A self-signed certificate MUST NOT be used.
 
 4.2. Signing
 Digital signatures MUST be generated and validated according to the Digital
@@ -126,7 +126,8 @@ detailed in section 4.1.
 The identity types and schema documented below are reused throughout all OpenGDPR API contracts.
 
 5.1.  Identity Type Keys
-The following identity type keys are supported:
+The following identity type keys are supported, notice the support for a processor-specific identity type:
+
 controller_customer_id
 android_advertising_id
 android_id
@@ -138,6 +139,7 @@ microsoft_advertising_id
 microsoft_publisher_id
 roku_publisher_id
 roku_advertising_id
+[processor_name]_id
 
 5.2 Identity Formats
 The following identity formats are supported:
@@ -147,8 +149,8 @@ md5
 sha256
 
 5.3. Identity Object
-An OpenGDPR request MUST contain one or more Identity objects used to fulfill
-the request.
+An OpenGDPR request MUST contain one or more Identity objects used to fulfill the request.
+
 identity_type
   REQUIRED string value representing the form of identity.
   Supported values: See section 5.1.
@@ -186,7 +188,7 @@ supported_subject_request_types
 processor_certificate
   REQUIRED HTTP endpoint x.509 where certificate used to sign callbacks and
   OpenGDPR API responses can be downloaded. The domain MUST match that of
-  the discovery callback.
+  the callback header "X-OpenGDPR-Processor-Domain".
 
 6.4.  Example Discovery Response
 HTTP/1.1 200 OK
@@ -210,6 +212,8 @@ Content Type: application/json
 }
 
 7. OpenGDPR Request
+A single OpenGDPR request MUST encapsulate a single data subject request.
+Controllers MUST NOT bundle many requests into one OpenGDPR request.
 
 7.1. OpenGDPR Request Properties
 OpenGDPR service implementations MUST provide an endpoint that creates OpenGDPR
@@ -296,11 +300,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example_controller_id",
-"expected_completion_time":"2018-11-01T15:00:01Z",
-"received_time":"2018 10 02T15:00:01Z",
-"encoded_request":"<BASE64 ENCODED REQUEST>"
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798"
+  "controller_id":"example_controller_id",
+  "expected_completion_time":"2018-11-01T15:00:01Z",
+  "received_time":"2018 10 02T15:00:01Z",
+  "encoded_request":"<BASE64 ENCODED REQUEST>"
+  "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798"
 }
 
 7.5.  OpenGDPR Error Response Properties
@@ -327,14 +331,14 @@ Content Type: application/json;charset=UTF 8
 Cache Control: no store
 Pragma: no cache
 {
-"error": {
-"code": 400,
-"message": "subject_request_id field is required",
-"errors": [{
- "domain": "Validation",
- "reason": "IllegalArgumentException",
- "message": "subject_request_id field is required."
-}] }
+  "error": {
+  "code": 400,
+  "message": "subject_request_id field is required",
+  "errors": [{
+    "domain": "Validation",
+    "reason": "IllegalArgumentException",
+    "message": "subject_request_id field is required."
+  }] }
 }
 
 8. OpenGDPR Status
@@ -345,6 +349,7 @@ are supported:
 2. in_progress: indicates that a request is currently being acted on. Processors SHOULD indicate this request if possible.
 3. completed: indicates that a request has been fulfilled.
 4. cancelled: indicates that a request has been cancelled.
+5. error: indicates that a request cannot be processed.
 
 8.1.  Request Status Endpoint
 OpenGDPR endpoints MUST be queryable for request status via an HTTP GET for the
@@ -378,6 +383,8 @@ request_status
   REQUIRED string indicating the status of the request as defined in section 8.
 api_version
   OPTIONAL Version string representing the desired version of the OpenGDPR API
+results_url
+  OPTIONAL A valid URL where the results of the request is available.
 
 8.4.  Example Status Response
 HTTP/1.1 200 OK
@@ -404,14 +411,10 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 8.5. Request Status Callback
 OpenGDPR requests SHOULD contain status_callback_urls (see section 7.1). The
 following rules govern their use:
-   All included callbacks MUST be invoked by the Processor on request state
-  change.
-   Processors MUST try to send callbacks at least once. It is recommended but
-  not required to retry callbacks when they have failed.
-   Controllers SHOULD make all reasonable effort towards a reliable callback
-  system.
-   Processors SHOULD monitor for failed callback requests and notify affected
-  Controllers.
+   All included callbacks MUST be invoked by the Processor on request state change.
+   Processors MUST try to send callbacks at least once. It is recommended but not required to retry callbacks when they have failed.
+   Controllers SHOULD make all reasonable effort towards a reliable callback system.
+   Processors SHOULD monitor for failed callback requests and notify affected Controllers.
    Controllers SHOULD authenticate the validity of the callback.
 
 8.6. Callback Request
@@ -423,6 +426,7 @@ X-OpenGDPR-Processor-Domain
 X-OpenGDPR-Signature
   REQUIRED header Base64 encoded signature generated by a certificate
   matching the domain in the X-OpenGDPR-Processor-Domain header.
+
 The callback body MUST include the following parameters:
 controller_id
   REQUIRED string indicating the unique identity of the Controller in the
@@ -435,6 +439,8 @@ request_status
   REQUIRED string indicating the status of the request. See section 8.
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the Processor expects to fulfill the request.
+results_url
+  OPTIONAL A valid URL where the results of the request is available.
 
 8.7. Callback Request Example
 POST /opengdpr_callbacks HTTP/1.1
@@ -452,11 +458,12 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example_controller_id",
-"expected_completion_time":"2018-11-01T15:00:01Z",
-"status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"request_status":"pending"
+  "controller_id":"example_controller_id",
+  "expected_completion_time":"2018-11-01T15:00:01Z",
+  "status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
+  "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
+  "request_status":"pending"
+  "results_url":"https://exampleprocessor.com/opengdpr/portability/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
 }
 
 8.8. Callback Authentication
@@ -521,11 +528,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example_controller_id",
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"received_time":"2018-10-02T15:00:01Z",
-"encoded_request":"<BASE64 ENCODED REQUEST>",
-"api_version":"0.1"
+  "controller_id":"example_controller_id",
+  "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
+  "received_time":"2018-10-02T15:00:01Z",
+  "encoded_request":"<BASE64 ENCODED REQUEST>",
+  "api_version":"0.1"
 }
 
 10.   Best Practices
