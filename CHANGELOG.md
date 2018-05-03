@@ -4,6 +4,8 @@ Changelog
 - Fixed typos and missing '-'
 - Clarified that endpoints must be on the same (sub)domain and it must match both the certificate and the X-OpenGDPR-Processor-Domain header.
 - Removed the request type of 'rectification' from the readme as it's not in scope yet.
+- Added certificate guidance to spec and a security guidelines document.
+- Added 'results_url' to status and callback objects for communicating the location of any results of the request (ie portability extract).
 
 0.1.4
 - Removed 'agent' role throughout and added a Best Practice to use a sub-processor to distribute requests and ensure mature infrastructure (retries, security verifications & logging)
