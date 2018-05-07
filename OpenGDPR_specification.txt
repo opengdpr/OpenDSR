@@ -513,7 +513,6 @@ processor_signature
 api_version
   OPTIONAL Version string representing the desired version of the OpenGDPR
   API
-Processor's system.
 
 
 9.3.  Example OpenGDPR Cancellation Response
