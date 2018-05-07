@@ -342,6 +342,7 @@ are supported:
 2. in_progress: indicates that a request is currently being acted on. Processors SHOULD indicate this request if possible.
 3. completed: indicates that a request has been fulfilled.
 4. cancelled: indicates that a request has been cancelled.
+5. error: indicates that a request has encountered an error during fulfillment and cannot be processed.
 
 8.1.  Request Status Endpoint
 OpenGDPR endpoints MUST be queryable for request status via an HTTP GET for the
@@ -375,6 +376,9 @@ request_status
   REQUIRED string indicating the status of the request as defined in section 8.
 api_version
   OPTIONAL Version string representing the desired version of the OpenGDPR API
+results_url
+  OPTIONAL A valid URL where the results of the request is available.
+
 
 8.4.  Example Status Response
 HTTP/1.1 200 OK
@@ -391,11 +395,12 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-	"controller_id": "example_controller_id",
-	"expected_completion_time": "2018-11-01T15:00:01Z",
-	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
-	"request_status": "pending",
-	"api_version": "0.1"
+	"controller_id":"example_controller_id",
+	"expected_completion_time":"2018-11-01T15:00:01Z",
+	"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
+	"request_status":"complete",
+	"api_version":"0.1",
+	"results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
 }
 
 8.5. Request Status Callback
@@ -432,6 +437,9 @@ request_status
   REQUIRED string indicating the status of the request. See section 8.
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the Processor expects to fulfill the request.
+results_url
+  OPTIONAL A valid URL where the results of the request is available.
+
 
 8.7. Callback Request Example
 POST /opengdpr_callbacks HTTP/1.1
@@ -449,11 +457,12 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-	"controller_id": "example processor id",
-	"expected_completion_time": "2018-11-01T15:00:01Z",
-	"status_callback_url": "https://examplecontroller.com/opengdpr_callbacks",
-	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
-	"request_status": "pending"
+	"controller_id":"example processor id",
+	"expected_completion_time":"2018-11-01T15:00:01Z",
+	"status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
+	"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
+	"request_status":"complete",
+	"results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
 }
 
 8.8. Callback Authentication
