@@ -110,7 +110,7 @@ that meet an individual party’s (e.g. Controller or Processor) security requir
 4.1. Certificates
 Digital certificates used in this protocol MUST be issued by a trusted
 certificate authority and MUST be issued to the organization issuing the
-callback.
+callback. A self-signed certificate MUST NOT be used.
 
 4.2. Signing
 Digital signatures MUST be generated and validated according to the Digital
