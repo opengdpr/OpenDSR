@@ -2,14 +2,14 @@
 Security guidelines to jumpstart implementations and avoid security pitfalls.
 
 ## Certificates
-● Purchase certificate solely for OpenGDPR to prevent issues elsewhere with your infrastructure if
+- Purchase certificate solely for OpenGDPR to prevent issues elsewhere with your infrastructure if
 you ever need to revoke your OpenGDPR certificate for any reason.
-● Certificate must be purchased for a dedicated OpenGDPR subdomain rather than using a wildcard
+- Certificate must be purchased for a dedicated OpenGDPR subdomain rather than using a wildcard
 or subdomain that is use for other purposes. We recommend following the standard form of
 opengdpr.companydomain.com, for example: opengdpr.mparticle.com
-● Valid CA signed certificates should be mandated where possible and self signed certificates should
+- Valid CA signed certificates should be mandated where possible and self signed certificates should
 be avoided for this purpose to allow other parties to validate your certificate is valid.
-● Preferably obtain an EV certificate to provide increased verification of company association.
+- Preferably obtain an EV certificate to provide increased verification of company association.
 
 ## Callback validation:
 All callbacks must be issued over TLS, and the server certificate must be validated to match the callback
