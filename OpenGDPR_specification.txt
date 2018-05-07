@@ -263,6 +263,9 @@ Content Type: application/json
 7.3.  OpenGDPR Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 201 and it MUST include the following parameters:
+controller_id
+  REQUIRED string indicating the unique identity of the Controller in the
+  Processor’s system.
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the
   Processor expects to fulfill the request.
@@ -295,7 +298,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
 	"controller_id":"example_controller_id",
 	"expected_completion_time": "2018-11-01T15:00:01Z",
-	"received_time": "2018-1002T15:00:01Z",
+	"received_time": "2018-10-02T15:00:01Z",
 	"encoded_request": "<BASE64 ENCODED REQUEST>",
 	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798"
 }
@@ -495,6 +498,8 @@ Accept: application/json
 9.2.  Cancellation Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 202, and the following parameters:
+controller_id
+  REQUIRED string indicating the unique identity of the Controller in the
 received_time
   REQUIRED RFC 3339 date string representing the time when the Processor received the cancellation request.
 encoded_request
@@ -508,8 +513,6 @@ processor_signature
 api_version
   OPTIONAL Version string representing the desired version of the OpenGDPR
   API
-controller_id
-  REQUIRED string indicating the unique identity of the Controller in the
 Processor's system.
 
 
