@@ -110,7 +110,7 @@ that meet an individual party’s (e.g. Controller or Processor) security requir
 4.1. Certificates
 Digital certificates used in this protocol MUST be issued by a trusted
 certificate authority and MUST be issued to the organization issuing the
-callback.
+callback. A self-signed certificate MUST NOT be used.
 
 4.2. Signing
 Digital signatures MUST be generated and validated according to the Digital
@@ -296,7 +296,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-  "controller_id":"example_controller_id",
+	"controller_id":"example_controller_id",
 	"expected_completion_time": "2018-11-01T15:00:01Z",
 	"received_time": "2018-10-02T15:00:01Z",
 	"encoded_request": "<BASE64 ENCODED REQUEST>",
@@ -323,7 +323,7 @@ errors
 
 7.7.  Example OpenGDPR Error Response
 HTTP/1.1 400 Bad Request
-Content Type: application/json;charset=UTF 8
+Content Type: application/json;charset=utf-8
 Cache Control: no store
 Pragma: no cache
 {
@@ -461,7 +461,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-	"controller_id":"example processor id",
+	"controller_id":"example_controller_id",
 	"expected_completion_time":"2018-11-01T15:00:01Z",
 	"status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
 	"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
@@ -499,8 +499,7 @@ Accept: application/json
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 202, and the following parameters:
 controller_id
-  REQUIRED string indicating the unique identity of the Controller in the
-  Processor's system.
+  REQUIRED string indicating the unique identity of the Controller in the Processor's system
 received_time
   REQUIRED RFC 3339 date string representing the time when the Processor received the cancellation request.
 encoded_request
@@ -531,7 +530,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-  "controller_id":"example_controller_id",
+	"controller_id":"example_controller_id",
 	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
 	"received_time": "2018-10-02T15:00:01Z",
 	"encoded_request": "<BASE64 ENCODED REQUEST>",
