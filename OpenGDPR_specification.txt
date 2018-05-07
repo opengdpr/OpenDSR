@@ -508,9 +508,12 @@ processor_signature
 api_version
   OPTIONAL Version string representing the desired version of the OpenGDPR
   API
+controller_id
+  REQUIRED string indicating the unique identity of the Controller in the
+Processor's system.
 
 
-9.3.  Example OpenGDPR Response
+9.3.  Example OpenGDPR Cancellation Response
 HTTP/1.1 202 Accepted
 Content Type: application/json
 X-OpenGDPR-Processor-Domain: example-processor.com
