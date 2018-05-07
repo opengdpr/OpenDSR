@@ -499,7 +499,7 @@ Accept: application/json
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 202, and the following parameters:
 controller_id
-  REQUIRED string indicating the unique identity of the Controller in the
+  REQUIRED string indicating the unique identity of the Controller in the Processor's system
 received_time
   REQUIRED RFC 3339 date string representing the time when the Processor received the cancellation request.
 encoded_request
