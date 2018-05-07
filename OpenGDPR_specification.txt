@@ -166,7 +166,7 @@ support for the OpenGDPR specification via HTTP GET.
 
 6.1.  Example Discovery Request
 GET /discovery HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 6.2. Subject Request Types
@@ -239,7 +239,7 @@ status_callback_urls
 
 7.2.  Example OpenGDPR Request
 POST /opengdpr_requests HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 Content Type: application/json
 {
@@ -263,6 +263,9 @@ Content Type: application/json
 7.3.  OpenGDPR Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 201 and it MUST include the following parameters:
+controller_id
+  REQUIRED string indicating the unique identity of the Controller in the
+  Processor’s system.
 expected_completion_time
   REQUIRED RFC 3339 date string representing the time when the
   Processor expects to fulfill the request.
@@ -281,7 +284,7 @@ processor_signature
 7.4.  Example OpenGDPR Response
 HTTP/1.1 201 Created
 Content Type: application/json
-X-OpenGDPR-Processor-Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -293,10 +296,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"expected_completion_time":"2018-11-01T15:00:01Z",
-"received_time":"2018 10 02T15:00:01Z",
-"encoded_request":"<BASE64 ENCODED REQUEST>"
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
+  "controller_id":"example_controller_id",
+	"expected_completion_time": "2018-11-01T15:00:01Z",
+	"received_time": "2018-10-02T15:00:01Z",
+	"encoded_request": "<BASE64 ENCODED REQUEST>",
+	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798"
 }
 
 7.5.  OpenGDPR Error Response Properties
@@ -323,14 +327,15 @@ Content Type: application/json;charset=UTF 8
 Cache Control: no store
 Pragma: no cache
 {
-"error": {
-"code": 400,
-"message": "subject_request_id field is required",
-"errors": [{
- "domain": "Validation",
- "reason": "IllegalArgumentException",
- "message": "subject_request_id field is required."
-}] }
+	"error": {
+		"code": 400,
+		"message": "subject_request_id field is required",
+		"errors": [{
+			"domain": "Validation",
+			"reason": "IllegalArgumentException",
+			"message": "subject_request_id field is required."
+		}]
+	}
 }
 
 8. OpenGDPR Status
@@ -348,7 +353,7 @@ subject_request_id.
 
 8.2.  Example Status Request
 GET /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 8.3.  Status Response Properties
@@ -378,7 +383,7 @@ api_version
 8.4.  Example Status Response
 HTTP/1.1 200 OK
 Content Type: application/json
-X-OpenGDPR-Processor-Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -390,11 +395,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example_controller_id",
-"expected_completion_time":"2018-11-01T15:00:01Z",
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"request_status":"pending",
-"api_version":"0.1"
+	"controller_id": "example_controller_id",
+	"expected_completion_time": "2018-11-01T15:00:01Z",
+	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
+	"request_status": "pending",
+	"api_version": "0.1"
 }
 
 8.5. Request Status Callback
@@ -436,7 +441,7 @@ expected_completion_time
 POST /opengdpr_callbacks HTTP/1.1
 Host: examplecontroller.com
 Content Type: application/json
-X-OpenGDPR-Processor-Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -448,11 +453,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"controller_id":"example processor id",
-"expected_completion_time":"2018-11-01T15:00:01Z",
-"status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"request_status":"pending"
+	"controller_id": "example_controller_id",
+	"expected_completion_time": "2018-11-01T15:00:01Z",
+	"status_callback_url": "https://examplecontroller.com/opengdpr_callbacks",
+	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
+	"request_status": "pending"
 }
 
 8.8. Callback Authentication
@@ -478,12 +483,15 @@ subject_request_id. OpenGDPR requests MAY be cancelled by the Controller while
 
 9.1.  Example Cancellation Request
 DELETE /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
-Host: example processor.com
+Host: example-processor.com
 Accept: application/json
 
 9.2.  Cancellation Response Properties
 For well formed requests, the OpenGDPR service MUST respond with HTTP status
 code 202, and the following parameters:
+controller_id
+  REQUIRED string indicating the unique identity of the Controller in the
+  Processor's system.
 received_time
   REQUIRED RFC 3339 date string representing the time when the Processor received the cancellation request.
 encoded_request
@@ -499,10 +507,10 @@ api_version
   API
 
 
-9.3.  Example OpenGDPR Response
+9.3.  Example OpenGDPR Cancellation Response
 HTTP/1.1 202 Accepted
 Content Type: application/json
-X-OpenGDPR-Processor-Domain: example processor.com
+X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
@@ -514,10 +522,11 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
-"subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
-"received_time":"2018 10 02T15:00:01Z",
-"encoded_request":"<BASE64 ENCODED REQUEST>",
-"api_version":"0.1",
+  "controller_id":"example_controller_id",
+	"subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
+	"received_time": "2018-10-02T15:00:01Z",
+	"encoded_request": "<BASE64 ENCODED REQUEST>",
+	"api_version": "0.1"
 }
 
 10.   Best Practices
