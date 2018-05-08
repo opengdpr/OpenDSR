@@ -43,7 +43,7 @@ The Data processor fulfills the request for the Controllers scope.
 ## Request Sequence
 This diagram outlines the flow of GDPR data subject requests all the way from the data subject to the fulfillment by each Processor. This flow includes optional callbacks that allow the Controller to receive status changes.
 
-![image](https://user-images.githubusercontent.com/566376/38212428-b4167bae-368b-11e8-8c1a-3d674083cd94.png)
+![protocol flow](images/figure_protocol_flow.png)
 
 1. New Data Subject Request: The data subject files a request to the data controller containing appropriate information. Request may be of any type provisioned in the GDPR text, commonly: access, portability, erasure, rectification.
 2. Request Distribution: The controller verifies the request and if it will be honored, it is submitted to Processors.
