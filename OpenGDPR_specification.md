@@ -81,24 +81,9 @@ Enacting compliance related activities to honor an OpenGDPR request.
 
 ### 3.2.  Protocol Flow
 
-  ```
+![protocol flow](images/figure_protocol_flow.png)
 
-  +-----+        +-----+         +-----+
-  |     |        |     |         |     |
-  |     | -(A)-> |     | -(B)->  |     |
-  |     |        |     |         |     | -(C)+
-  |     |        |     |         |     |     |
-  |     |        |     |         |     | <---+
-  |     |        |     |         |     |
-  |     |        |     |         |     |
-  |     |        |     |         |     |
-  |     |        |     |         |     |
-  |     | <-(E)- |     | <--(D)- |     |
-  +-----+        +-----+         +-----+
-  Data          Controller      Processor
-  Subject
-  ```
-  *Figure 1. Request Sequence Flow*
+*Figure 1. Request Sequence Flow*
 
 The flow illustrated in figure 1 includes the following steps:
 
@@ -679,45 +664,6 @@ easier to fulfill their GDPR rights. In doing so, there is a risk to leaking dat
 subject identities. Implementers are encouraged to take reasonable measures to
 safeguard each request and it’s encapsulated identities.
 
-## 12.   Conclusions
-
-None.
-
-## 13.   References
+## 12.   References
 
 [The EU General Data Protection Regulation](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016R0679&from=EN)
-
-### 13.2. Informative References
-
-## 14.   Acknowledgments
-
-Appendix A.
-
-Authors' Addresses
-
-```
-Andrew Katz
-mParticle CTO
-257 Park Avenue S #900, New York, NY 10010
-Email: akatz@mparticle.com
-
-Aurelie Pols
-mParticle DPO
-257 Park Avenue S #900, New York, NY 10010
-Email: v-apols@mparticle.com
-
-Ben Hoxie
-mParticle Product Management
-257 Park Avenue S #900, New York, NY 10010
-Email: bhoxie@mparticle.com
-
-Sam Dozor
-mParticle Engineering
-257 Park Avenue S #900, New York, NY 10010
-Email: sdozor@mparticle.com
-
-Patricio Jara
-mParticle Security
-257 Park Avenue S #900, New York, NY 10010
-Email: pjara@mparticle.com
-```
