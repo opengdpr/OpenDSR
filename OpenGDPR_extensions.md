@@ -1,22 +1,12 @@
 # OpenGDPR Extensions
 
-OpenGDPR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain. Processors **MUST** only implement an extension for items
-that do not already fit into the generic spec. Extensions **MUST** not be used for or contain authentication information. 
+OpenGDPR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain. 
 
-Example use cases are:
-- processor-specific user/device ids
-- additional non-sensitive metadata
+- The domain of each extension **MUST** match the processor's OpenGDPR domain.
+- Extensions **MUST** not be used for or contain authentication information. 
+- Processors **MUST** only implement an extension for items that do not already fit into the generic spec. 
 
-```json
-"extensions": {
-    "example-processor.com": {
-      "foo-processor-custom-id":123456
-    },
-    "example-other-processor.com": {
-      "another-custom-key":"baz"
-    }
-}
-```
+See section the [OpenGDPR spec](OpenGDPR_specification.md) for more information on the use of extensions.
 
 ## Published Extensions
 
@@ -26,14 +16,38 @@ Domain: `opengdpr.mparticle.com`
 
 Supported keys:
 
-- `mpid`: The internal mParticle ID. This is a 64-bit integer. Due to JSON library rounding, it's recommended to send this is a string.
+- `mpids`: An array of mParticle IDs. The mParticle ID is a 64-bit signed integer.
 
 ### Example
 
 ```json
 "extensions": {
     "opengdpr.mparticle.com": {
-      "mpid":"120934871234"
+      "mpids":[120934871234, 1309487143098]
     }
+}
+```
+
+### Schema
+
+```json
+{
+  "type": "object",
+  "properties": {
+    "opengdpr.mparticle.com": {
+      "type": "object",
+      "properties": {
+        "mpids": {
+          "type": "array",
+          "items": {
+            "examples": [
+              120934871234,
+              1309487143098
+            ]
+          }
+        }
+      }
+    }
+  }
 }
 ```
