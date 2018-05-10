@@ -231,7 +231,7 @@ Content Type: application/json
 
 ## 7. OpenGDPR Request
 
-### 7.1. OpenGDPR Request Properties
+### 7.1.1 OpenGDPR Request Properties
 
 OpenGDPR service implementations **MUST** provide an endpoint that creates OpenGDPR JSON requests via HTTP POST. Controllers **MUST** submit requests with the following parameters:
 
@@ -255,13 +255,23 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
   **OPTIONAL** Version string representing the desired version of the OpenGDPR API.
 
-`property_id`
-
-  **OPTIONAL** string representing the property, site, or app to which this request **SHOULD** be scoped.
-
 `status_callback_urls`
 
   **OPTIONAL** Array of urls to be invoked by the Processor on subject_request_status change. This array **SHOULD** be included to avoid polling.
+
+`extensions`
+
+  **OPTIONAL** Processor-id-keyed object representing processor-specific elements in the request. See below.
+
+#### 7.1.2 Extensions
+
+OpenGDPR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain. 
+
+- The domain of each extension **MUST** match the processor's OpenGDPR domain, matching the `X-OpenGDPR-Processor-Domain` header in OpenGDPR responses.
+- Extensions **MUST** not be used for or contain authentication information. 
+- Processors **MUST** only implement an extension for items that do not already fit into the generic spec. 
+
+[Currently known extensions can be found here](OpenGDPR_extensions.md).
 
 ### 7.2.  Example OpenGDPR Request
 
@@ -282,12 +292,21 @@ Content Type: application/json
     }
   ],
   "api_version": "0.1",
-  "property_id": "123456",
   "status_callback_urls": [
     "https://examplecontroller.com/opengdpr_callbacks"
-  ]
+  ],
+  "extensions": {
+    "example-processor.com": {
+      "foo-processor-custom-id":123456,
+      "property_id": "123456",
+    },
+    "example-other-processor.com": {
+      "foo-other-processor-custom-id":654321
+    }
+  }
 }
 ```
+
 
 ### 7.3.  OpenGDPR Response Properties
 
