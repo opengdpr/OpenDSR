@@ -101,7 +101,7 @@ widespread deployment and known security vulnerabilities. Implementations **MAY*
 ### 3.4. Versioning
 This spec will be released by major and minor increments using semantic versioning. Breaking changes will be pushed in major branches. More info is available here: https://semver.org/.
 
-URLs **MUST** include the major version number at the start, for example: https://opengdpr.processor.com/v1/discovrey.
+URLs **MUST** include the major version number at the start, for example: https://opengdpr.processor.com/v1/discovery.
 
 Resources **MUST** include the major and minor version in the "api_version" field, examples shown below.
 
