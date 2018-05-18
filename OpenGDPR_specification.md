@@ -203,7 +203,7 @@ erasure
 
 `supported_extensions`
 
-  **REQUIRED** array of extension keys as defined in 7.1.2.
+  **REQUIRED** an object containing the extensions supported as defined in 7.1.2.
 
 `processor_certificate`
 
@@ -226,10 +226,13 @@ Content Type: application/json
          "identity_format":"sha256"
       }
    ],
-   "supported_extensions":[
-    "example-processor.com",
-    "example-other-processor.com"
-   ],
+   "supported_extensions":
+   {
+    "opengdpr.example-processor.com":
+      [
+        "extension-name"
+      ],
+   },
    "supported_subject_request_types":[
       "erasure"
    ],
@@ -278,6 +281,7 @@ OpenGDPR requests may contain an `extensions` object, composed of a series of ch
 - The domain of each extension **MUST** match the processor's OpenGDPR domain, matching the `X-OpenGDPR-Processor-Domain` header in OpenGDPR responses.
 - Extensions **MUST** not be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
+- Extensions are published and defined in this repository in the "OpenGDPR_extensions.md" file.
 
 [Currently known extensions can be found here](OpenGDPR_extensions.md).
 
@@ -305,11 +309,11 @@ Content Type: application/json
   ],
   "extensions": {
     "example-processor.com": {
-      "foo-processor-custom-id":123456,
-      "property_id": "123456",
-    },
-    "example-other-processor.com": {
-      "foo-other-processor-custom-id":654321
+      "example-processor-custom-id":123456,
+      "custom-info": [
+        "12345",
+        "67890"
+      ],
     }
   }
 }
