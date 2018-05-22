@@ -245,7 +245,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `subject_identities`
 
-  **REQUIRED** array of Identity objects as specified in section 5.3.
+  **REQUIRED** array of Identity objects as specified in section 5.3. This is optional if identities are included in the `extensions` section. 
 
 `submitted_time`
 
@@ -261,7 +261,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `extensions`
 
-  **OPTIONAL** Processor-id-keyed object representing processor-specific elements in the request. See below.
+  **OPTIONAL** Processor-id-keyed object representing processor-specific elements in the request. See 7.1.2 below.
 
 #### 7.1.2 Extensions
 
