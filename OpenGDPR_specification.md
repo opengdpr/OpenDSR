@@ -209,7 +209,7 @@ erasure
 
 ```http
 HTTP/1.1 200 OK
-Content Type: application/json
+Content-Type: application/json
 {
    "api_version":"0.1",
    "supported_identities":[
@@ -245,7 +245,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `subject_identities`
 
-  **REQUIRED** array of Identity objects as specified in section 5.3. This is optional if identities are included in the `extensions` section. 
+  **REQUIRED** array of Identity objects as specified in section 5.3. This is optional if identities are included in the `extensions` section.
 
 `submitted_time`
 
@@ -279,7 +279,7 @@ OpenGDPR requests may contain an `extensions` object, composed of a series of ch
 POST /opengdpr_requests HTTP/1.1
 Host: example-processor.com
 Accept: application/json
-Content Type: application/json
+Content-Type: application/json
 {
   "subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
   "subject_request_type": "erasure",
@@ -393,7 +393,7 @@ authentication.
 
 ```http
 HTTP/1.1 400 Bad Request
-Content Type: application/json;charset=UTF-8
+Content-Type: application/json;charset=UTF-8
 Cache Control: no store
 Pragma: no cache
 {
@@ -493,7 +493,7 @@ The Status body **MUST** include the following properties:
 
 ```http
 HTTP/1.1 200 OK
-Content Type: application/json
+Content-Type: application/json
 X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
@@ -575,7 +575,7 @@ The callback body **MUST** include the following parameters:
 ```http
 POST /opengdpr_callbacks HTTP/1.1
 Host: examplecontroller.com
-Content Type: application/json
+Content-Type: application/json
 X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
@@ -652,7 +652,7 @@ code 202, and the following parameters:
 
 ```http
 HTTP/1.1 202 Accepted
-Content Type: application/json
+Content-Type: application/json
 X-OpenGDPR-Processor-Domain: example-processor.com
 X-OpenGDPR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
