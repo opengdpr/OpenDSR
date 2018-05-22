@@ -394,7 +394,7 @@ authentication.
 ```http
 HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
-Cache Control: no store
+Cache-Control: no store
 Pragma: no cache
 {
   "error": {
