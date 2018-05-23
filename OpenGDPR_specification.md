@@ -218,7 +218,7 @@ erasure
 HTTP/1.1 200 OK
 Content-Type: application/json
 {
-   "api_version":"0.1",
+   "api_version":"1.0",
    "supported_identities":[
       {
          "identity_type":"email",
@@ -298,7 +298,7 @@ Content-Type: application/json
       "identity_format": "raw"
     }
   ],
-  "api_version": "0.1",
+  "api_version": "1.0",
   "status_callback_urls": [
     "https://examplecontroller.com/opengdpr_callbacks"
   ],
@@ -517,7 +517,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
     "expected_completion_time":"2018-11-01T15:00:01Z",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
-    "api_version":"0.1",
+    "api_version":"1.0",
     "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
 }
 ```
@@ -675,7 +675,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
   "controller_id": "example_controller_id",
   "subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
   "received_time": "2018-10-02T15:00:01Z",
-  "api_version": "0.1"
+  "api_version": "1.0"
 }
 ```
 

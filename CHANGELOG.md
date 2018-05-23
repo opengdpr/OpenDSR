@@ -1,5 +1,11 @@
 Changelog
 
+1.0
+- Added support for `extensions`: processor-defined fields in each request. Used for additional scoping information (eg processor-project-id) or processor-specific identities (eg mparticle-id).
+- Converted spec to markdown format for easier reading and editing.
+- Added `results_url` to status objects to contain the outputs from an access or portability request when in status `completed`.
+- Added versioning information and requirement to include major version in the OpenGDPR resource URL.
+
 0.1.4
 - Removed 'agent' role throughout and added a Best Practice to use a sub-processor to distribute requests and ensure mature infrastructure (retries, security verifications & logging)
 - Removed 'GDPR for Lawyers' document that is no longer needed

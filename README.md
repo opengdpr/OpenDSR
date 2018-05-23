@@ -1,5 +1,5 @@
 # OpenGDPR Summary
-version 0.1.4
+version 1.0
 
 # Overview
 This is an introductory document intended to provide a summary of OpenGDPR. For full reference details, please see the complete specification at https://www.opengdpr.org and https://github.com/opengdpr/opengdpr.
@@ -89,7 +89,7 @@ Refer to the full specification for definitions of objects and fields.
       "identity_format":"raw"
    }
  ],
- "api_version":"0.1",
+ "api_version":"1.0",
  "property_id":"123456",
  "status_callback_urls":[
    "https://example-controller.com/opengdpr_callbacks"
