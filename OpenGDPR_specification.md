@@ -98,6 +98,13 @@ The flow illustrated in figure 1 includes the following steps:
 Whenever Transport Layer Security (TLS) is used by this specification, the appropriate version (or versions) of TLS will vary over time, based on the
 widespread deployment and known security vulnerabilities. Implementations **MAY** also support additional transport layer security mechanisms that meet an individual party’s (e.g. Controller or Processor) security requirements.
 
+### 3.4. Versions
+This spec will be released by major and minor increments using semantic versioning. Breaking changes will be pushed in major branches. More info is available here: https://semver.org/.
+
+URLs **MUST** include the major version number at the start, for example: https://opengdpr.processor.com/v1/discovery.
+
+Resources **MAY** include the major and minor version in the "api_version" field, examples shown below.
+
 ## 4. Security
 
 ### 4.1. Certificates
