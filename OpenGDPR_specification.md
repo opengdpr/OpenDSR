@@ -2,7 +2,7 @@
 
 An open specification for data subject request management.
 
-### Version 0.1.4
+### Version 1.0
 
 ### Abstract
 
@@ -363,7 +363,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
-    "received_time":"2018 10 02T15:00:01Z",
+    "received_time":"2018-10-02T15:00:01Z",
     "encoded_request":"<BASE64 ENCODED REQUEST>",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798"
 }
