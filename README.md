@@ -92,7 +92,7 @@ Refer to the full specification for definitions of objects and fields.
  "api_version":"0.1",
  "property_id":"123456",
  "status_callback_urls":[
-   "https://example controller.com/opengdpr_callbacks"
+   "https://example-controller.com/opengdpr_callbacks"
  ]
 }
 ```
