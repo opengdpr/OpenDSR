@@ -37,8 +37,7 @@ Steps ii through vi should be handled by a library and not validated manually.
      2. Validate the base64-decoded signature against the raw request body using the SHA256 digest.
 
 4. If both the certificate and signature are valid, the payload can be processed:
-     1. Base64 decode the callback body
-     2. Validate that it is valid JSON
+     2. Validate that the callback body is valid JSON
      3. Process the callback
 
 5. Respond to the callback.
