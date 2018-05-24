@@ -23,7 +23,7 @@ processor whitelist.
 signature:
 
      1. Callback issuers must publish their signing certificate on the /discovery endpoint of their OpenGDPR domain
-    i. This certificate may be cached for the lifetime of the certificate
+          i. This certificate may be cached for the lifetime of the certificate
      2. Validate that the certificate hasn’t expired
      3. Validate that the certificate was issued by a trusted CA
      4. Validate that the certificate hasn’t been revoked
@@ -32,9 +32,9 @@ signature:
      7. Validate that the certificate has the ‘Data Signature’ extension
 Steps ii through vi should be handled by a library and not validated manually.
 
-3. If the certificate is valid, the signature (taken from the X­OpenGDPR­Signature header) must be validated:
+3. If the certificate is valid, the signature (taken from the `X-OpenGDPR-Signature` header) must be validated:
      1. Extract the public key from the processor’s certificate
-     2. Validate signature against the base64 decoded request body
+     2. Validate the base64-decoded signature against the raw request body using the SHA256 digest.
 
 4. If both the certificate and signature are valid, the payload can be processed:
      1. Base64 decode the callback body
