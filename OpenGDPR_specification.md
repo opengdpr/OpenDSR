@@ -43,7 +43,7 @@ Authorities.
 ### 1.1.  Notational Conventions
 - The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC2119].
+interpreted as described in [RFC2119](https://tools.ietf.org/html/rfc2119).
 - Global Unique Identifiers (GUID) **MUST** be lowercase and v4 format.
 
 
