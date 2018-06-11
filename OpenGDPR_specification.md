@@ -43,7 +43,7 @@ Authorities.
 ### 1.1.  Notational Conventions
 - The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC2119].
+interpreted as described in [RFC2119](https://tools.ietf.org/html/rfc2119).
 - Global Unique Identifiers (GUID) **MUST** be lowercase and v4 format.
 
 
@@ -111,7 +111,7 @@ Resources **MAY** include the major and minor version in the "api_version" field
 
 Digital certificates used in this protocol **MUST** be issued by a trusted
 certificate authority and **MUST** be issued to the organization issuing the
-callback. A self-signed certificate **MUST** not be used.
+callback. A self-signed certificate **MUST NOT** be used.
 
 ### 4.2. Signing
 
@@ -275,7 +275,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 OpenGDPR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
 
 - The domain of each extension **MUST** match the processor's OpenGDPR domain, matching the `X-OpenGDPR-Processor-Domain` header in OpenGDPR responses.
-- Extensions **MUST** not be used for or contain authentication information.
+- Extensions **MUST NOT** be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
 
 [Currently known extensions can be found here](OpenGDPR_extensions.md).
@@ -334,7 +334,7 @@ code 201 and it **MUST** include the following parameters:
 
 `encoded_request`
 
-  **REQUIRED** Base64 encoding of the entire body of the OpenGDPR request. Controllers **MUST** not log or store this.
+  **REQUIRED** Base64 encoding of the entire body of the OpenGDPR request. Controllers **MUST NOT** log or store this.
 
 `subject_request_id`
 
@@ -381,7 +381,7 @@ For errors, the OpenGDPR service **MUST** respond with HTTP status code 400 and
 ### 7.6.  Error Object
 
 Processors **SHOULD** include descriptive error responses. Error
-responses **MUST** not contain sensitive information related to user identity or
+responses **MUST NOT** contain sensitive information related to user identity or
 authentication.
 
 `code`
@@ -528,8 +528,7 @@ OpenGDPR requests **SHOULD** contain `status_callback_urls` (see section 7.1). T
 following rules govern their use:
    - All included callbacks **MUST** be invoked by the Processor on request state
   change.
-   - Processors **MUST** try to send callbacks at least once. It is recommended but
-  not **REQUIRED** to retry callbacks when they have failed.
+   - Processors **MUST** try to send callbacks at least once. Processors **SHOULD** retry callbacks when they have failed.
    - Controllers **SHOULD** make all reasonable effort towards a reliable callback
   system.
    - Processors **SHOULD** monitor for failed callback requests and notify affected
@@ -552,6 +551,7 @@ Callbacks **MUST** include the following headers:
   matching the domain in the X-OpenGDPR-Processor-Domain header.
 
 The callback body **MUST** include the following parameters:
+
 `controller_id`
 
   **REQUIRED** string indicating the unique identity of the Controller in the
