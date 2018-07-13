@@ -435,6 +435,10 @@ Indicates that a request is currently being acted on. Processors **SHOULD** indi
 
 Indicates that a request has been fulfilled.
 
+`error`
+
+Indicates that a request has been failed due to an error. A message **SHOULD** be provided with details about the error.
+
 `cancelled`
 
 Indicates that a request has been cancelled.
@@ -494,6 +498,10 @@ The Status body **MUST** include the following properties:
 `results_url`
 
   **OPTIONAL** A valid URL where the results of the request are available.
+
+`message`
+
+  **OPTIONAL** A message with details about the current status.
 
 
 ### 8.4.  Example Status Response
