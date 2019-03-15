@@ -157,8 +157,9 @@ sha256
 
 ### 5.3. Identity Object
 
-An OpenGDPR request **MUST** contain one or more Identity objects used to fulfill
-the request. An Identity object contains the following properties:
+An OpenGDPR request **MAY** contain one or more Identity objects used to fulfill the request.
+The identity object is **REQUIRED** unless identities are present in an extension object, see section 7.1.2 
+An Identity object contains the following properties:
 
 - `identity_type`
 
@@ -252,7 +253,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `subject_identities`
 
-  **REQUIRED** array of Identity objects as specified in section 5.3. This is optional if identities are included in the `extensions` section.
+  **OPTIONAL** array of Identity objects as specified in section 5.3. This is **REQUIRED** unless identities are included in an `extensions` object.
 
 `submitted_time`
 
@@ -272,7 +273,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 #### 7.1.2 Extensions
 
-OpenGDPR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
+OpenGDPR requests **MAY** contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
 
 - The domain of each extension **MUST** match the processor's OpenGDPR domain, matching the `X-OpenGDPR-Processor-Domain` header in OpenGDPR responses.
 - Extensions **MUST NOT** be used for or contain authentication information.
