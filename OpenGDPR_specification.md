@@ -218,6 +218,7 @@ erasure
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
+
 {
    "api_version":"1.0",
    "supported_identities":[
@@ -288,6 +289,7 @@ POST /opengdpr_requests HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 Content-Type: application/json
+
 {
   "subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
   "subject_request_type": "erasure",
@@ -361,6 +363,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 11S4oDfu0c3t/xUCZWg0hoR3XL3B7NjcrlrQinB1KbyTNZccKR0F4Lk9fDgwTVkrAg152UqPyzXxpdzX
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
+
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
@@ -404,6 +407,7 @@ HTTP/1.1 400 Bad Request
 Content-Type: application/json;charset=UTF-8
 Cache-Control: no store
 Pragma: no cache
+
 {
   "error": {
     "code": 400,
@@ -513,6 +517,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 11S4oDfu0c3t/xUCZWg0hoR3XL3B7NjcrlrQinB1KbyTNZccKR0F4Lk9fDgwTVkrAg152UqPyzXxpdzX
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
+
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
@@ -595,6 +600,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 11S4oDfu0c3t/xUCZWg0hoR3XL3B7NjcrlrQinB1KbyTNZccKR0F4Lk9fDgwTVkrAg152UqPyzXxpdzX
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
+
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
@@ -672,6 +678,7 @@ waCrLx7WV5y9TMDCf+2FILOJM/MwTUy1dLZiaFHhGdzld2AjbjK1CfVzyPssch0iQYYtbR49GhumvkYl
 11S4oDfu0c3t/xUCZWg0hoR3XL3B7NjcrlrQinB1KbyTNZccKR0F4Lk9fDgwTVkrAg152UqPyzXxpdzX
 jfkDkSEgAevXQwVJWBNf18bMIEgdH2usF/XauQoyrne7rcMIWBISPgtBPj3mhcrwscjGVsxqJva8KCVC
 KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
+
 {
   "controller_id": "example_controller_id",
   "subject_request_id": "a7551968-d5d6-44b2-9831-815ac9017798",
