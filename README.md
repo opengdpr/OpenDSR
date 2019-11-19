@@ -1,11 +1,11 @@
-# OpenGDPR Summary
+# OpenCompliance Summary
 version 1.0
 
 # Overview
-This is an introductory document intended to provide a summary of OpenGDPR. For full reference details, please see the complete specification at https://www.opengdpr.org and https://github.com/opengdpr/opengdpr.
+This is an introductory document intended to provide a summary of OpenCompliance. For full reference details, please see the complete specification at https://www.OpenCompliance.org and https://github.com/OpenCompliance/OpenCompliance.
 
 # Goals and Scope
-The OpenGDPR specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
+The OpenCompliance specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
 
 For more information on the Data Subject Rights, see chapter 3 of the GDPR.
 
@@ -58,20 +58,20 @@ The spec supports request types of “erasure”, "access" and “portability”
 ## Endpoints
 This is an overview of available HTTP methods for communicating between Controllers and Processors. The following endpoints should be provided by the Processor (to receive requests from the Controller).
 
-Restful API endpoints for the resource “opengdpr_requests”:
+Restful API endpoints for the resource “OpenCompliance_requests”:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| POST | opengdpr_requests/ | Create a new OpenGDPR request | Yes |
-| GET | opengdpr_requests/{RequestId} | Retrieve status of a single OpenGDPR request | Yes |
-| PUT | opengdpr_requests/{RequestId} | - | No, requests cannot be updated after being created |
-| DELETE | opengdpr_requests/{RequestId} | Cancel an OpenGDPR request | Yes, cancellation is valid in status “pending” only |
+| POST | OpenCompliance_requests/ | Create a new OpenCompliance request | Yes |
+| GET | OpenCompliance_requests/{RequestId} | Retrieve status of a single OpenCompliance request | Yes |
+| PUT | OpenCompliance_requests/{RequestId} | - | No, requests cannot be updated after being created |
+| DELETE | OpenCompliance_requests/{RequestId} | Cancel an OpenCompliance request | Yes, cancellation is valid in status “pending” only |
 
 Non-Restful endpoints:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| GET     | /discovery | Processors describe their OpenGDPR support| Yes  |
+| GET     | /discovery | Processors describe their OpenCompliance support| Yes  |
 | POST    | /callback | Sent by Processors when a request status changes| Yes |
 
 
@@ -91,7 +91,7 @@ Refer to the full specification for definitions of objects and fields.
  ],
  "api_version":"1.0",
  "status_callback_urls":[
-   "https://example-controller.com/opengdpr_callbacks"
+   "https://example-controller.com/OpenCompliance_callbacks"
  ]
 }
 ```
