@@ -508,6 +508,14 @@ The Status body **MUST** include the following properties:
 
   **OPTIONAL** A valid URL where the results of the request are available.
 
+<<<<<<< HEAD:specification.md
+=======
+`results_count`
+
+  **OPTIONAL** A count of results found when fulfilling this request.
+
+
+>>>>>>> cf12165d53e77077483824460ad3287df91edc1c:specification.md
 ### 8.4.  Example Status Response
 
 ```http
@@ -531,7 +539,8 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
     "api_version":"1.0",
-    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
+    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
+    "results_count":103
 }
 ```
 
@@ -590,6 +599,11 @@ The callback body **MUST** include the following parameters:
 
   **OPTIONAL** A valid URL where the results of the request are available.
 
+`results_count`
+
+  **OPTIONAL** A count of results found when fulfilling this request.
+
+
 ### 8.7. Callback Request Example
 
 ```http
@@ -614,7 +628,8 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
     "status_callback_url":"https://examplecontroller.com/OpenCompliance_callbacks",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
-    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
+    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
+    "results_count":340
 }
 ```
 
