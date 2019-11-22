@@ -508,14 +508,10 @@ The Status body **MUST** include the following properties:
 
   **OPTIONAL** A valid URL where the results of the request are available.
 
-<<<<<<< HEAD:specification.md
-=======
 `results_count`
 
   **OPTIONAL** A count of results found when fulfilling this request.
 
-
->>>>>>> cf12165d53e77077483824460ad3287df91edc1c:specification.md
 ### 8.4.  Example Status Response
 
 ```http

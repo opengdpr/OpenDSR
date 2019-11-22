@@ -58,14 +58,14 @@ The spec supports request types of “erasure”, "access" and “portability”
 ## Endpoints
 This is an overview of available HTTP methods for communicating between Controllers and Processors. The following endpoints should be provided by the Processor (to receive requests from the Controller).
 
-Restful API endpoints for the resource “OpenCompliance_requests”:
+Restful API endpoints for the resource “opencompliance_requests”:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| POST | OpenCompliance_requests/ | Create a new OpenCompliance request | Yes |
-| GET | OpenCompliance_requests/{RequestId} | Retrieve status of a single OpenCompliance request | Yes |
-| PUT | OpenCompliance_requests/{RequestId} | - | No, requests cannot be updated after being created |
-| DELETE | OpenCompliance_requests/{RequestId} | Cancel an OpenCompliance request | Yes, cancellation is valid in status “pending” only |
+| POST | opencompliance_requests/ | Create a new OpenCompliance request | Yes |
+| GET | opencompliance_requests/{RequestId} | Retrieve status of a single OpenCompliance request | Yes |
+| PUT | opencompliance_requests/{RequestId} | - | No, requests cannot be updated after being created |
+| DELETE | opencompliance_requests/{RequestId} | Cancel an OpenCompliance request | Yes, cancellation is valid in status “pending” only |
 
 Non-Restful endpoints:
 
@@ -91,7 +91,7 @@ Refer to the full specification for definitions of objects and fields.
  ],
  "api_version":"1.0",
  "status_callback_urls":[
-   "https://example-controller.com/OpenCompliance_callbacks"
+   "https://example-controller.com/opencompliance_callbacks"
  ]
 }
 ```

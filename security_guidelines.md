@@ -6,7 +6,7 @@ Security guidelines to jumpstart implementations and avoid security pitfalls.
 you ever need to revoke your OpenCompliance certificate for any reason.
 2. Certificate must be purchased for a dedicated OpenCompliance subdomain rather than using a wildcard
 or subdomain that is use for other purposes. We recommend following the standard form of
-OpenCompliance.companydomain.com, for example: OpenCompliance.mparticle.com
+OpenCompliance.companydomain.com, for example: opencompliance.mparticle.com
 3. Valid CA signed certificates should be mandated where possible and self signed certificates should
 be avoided for this purpose to allow other parties to validate your certificate is valid.
 4. Preferably obtain an EV certificate to provide increased verification of company association.

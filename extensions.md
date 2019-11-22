@@ -12,7 +12,7 @@ See section the [OpenCompliance spec](OpenCompliance_specification.md) for more 
 
 ### mParticle
 
-Domain: `OpenCompliance.mparticle.com`
+Domain: `opencompliance.mparticle.com`
 
 Supported keys:
 
@@ -22,7 +22,7 @@ Supported keys:
 
 ```json
 "extensions": {
-    "OpenCompliance.mparticle.com": {
+    "opencompliance.mparticle.com": {
       "mpids":[120934871234, 1309487143098]
     }
 }
@@ -34,7 +34,7 @@ Supported keys:
 {
   "type": "object",
   "properties": {
-    "OpenCompliance.mparticle.com": {
+    "opencompliance.mparticle.com": {
       "type": "object",
       "properties": {
         "mpids": {
