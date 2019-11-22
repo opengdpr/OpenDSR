@@ -1,5 +1,4 @@
 # OpenCompliance Summary
-version 1.0
 
 # Overview
 This is an introductory document intended to provide a summary of OpenCompliance. For full reference details, please see the complete specification at https://www.OpenCompliance.org and https://github.com/OpenCompliance/OpenCompliance.

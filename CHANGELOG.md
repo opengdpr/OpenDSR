@@ -1,9 +1,10 @@
 Changelog
 2.0
 - Renamed this project 'OpenCompliance' to encompass CCPA support
-- Changed references to OpenGDPR to OpenCompliance/OpenGDPR
+- Changed references to OpenGDPR to OpenCompliance
 - Added regulation field of 'regulation'
 - Added section 10.1 to provide some guidance on supporting prior versions, including the renaming of the project
+- Tagged V1 to branch `opengdpr_v1` for posterity: https://github.com/opengdpr/opengdpr/tree/opengdpr_v1
 
 1.0
 - Added support for `extensions`: processor-defined fields in each request. Used for additional scoping information (eg processor-project-id) or processor-specific identities (eg mparticle-id).
