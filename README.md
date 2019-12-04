@@ -1,7 +1,7 @@
 # OpenDSR Summary
 
 # Overview
-This is an introductory document intended to provide a summary of OpenDSR. For full reference details, please see the complete specification at https://www.OpenDSR.org and https://github.com/OpenDSR/OpenDSR.
+This is an introductory document intended to provide a summary of OpenDSR. For full reference details, please see the complete specification at https://www.OpenDSR.org and https://github.com/OpenDSR/OpenDSR. This project was formerly known as OpenGDPR and existed at https://www.OpenGDPR.org and https://github.com/OpeGDPR/OpenGDPR.
 
 # Goals and Scope
 The OpenDSR specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
