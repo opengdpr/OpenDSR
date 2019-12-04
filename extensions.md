@@ -1,18 +1,18 @@
-# OpenCompliance Extensions
+# OpenDSR Extensions
 
-OpenCompliance requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
+OpenDSR requests may contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
 
-- The domain of each extension **MUST** match the processor's OpenCompliance domain.
+- The domain of each extension **MUST** match the processor's OpenDSR domain.
 - Extensions **MUST** not be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
 
-See section the [OpenCompliance spec](OpenCompliance_specification.md) for more information on the use of extensions.
+See section the [OpenDSR spec](OpenDSR_specification.md) for more information on the use of extensions.
 
 ## Published Extensions
 
 ### mParticle
 
-Domain: `opencompliance.mparticle.com`
+Domain: `opendsr.mparticle.com`
 
 Supported keys:
 
@@ -22,7 +22,7 @@ Supported keys:
 
 ```json
 "extensions": {
-    "opencompliance.mparticle.com": {
+    "opendsr.mparticle.com": {
       "mpids":[120934871234, 1309487143098]
     }
 }
@@ -34,7 +34,7 @@ Supported keys:
 {
   "type": "object",
   "properties": {
-    "opencompliance.mparticle.com": {
+    "opendsr.mparticle.com": {
       "type": "object",
       "properties": {
         "mpids": {

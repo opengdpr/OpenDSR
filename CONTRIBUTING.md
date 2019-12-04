@@ -1,16 +1,16 @@
-# How to contribute to OpenCompliance
+# How to contribute to OpenDSR
 Firstly, thank you for your interest and contribution! Here is a quick set of guidelines for contributing. These are guidelines and not hard and fast rules, please use your best judgement.
 
-Here are a few other OpenCompliance resources:
-- Website: OpenCompliance.org
-- Public Slack group: OpenCompliance.slack.com
+Here are a few other OpenDSR resources:
+- Website: OpenDSR.org
+- Public Slack group: OpenDSR.slack.com
 
 ## Questions about the spec or how certain cases are handled?
 - Search the repositories issues (open and closed) and the wiki to see if it has been discussed already.
 - Hop into the Slack channel and chat with us, someone will help you out.
 - Please don't open new issues for simple questions, asking in Slack is much faster
 
-## Have you implemented the OpenCompliance spec and want to spread the word?
+## Have you implemented the OpenDSR spec and want to spread the word?
 Awesome! Add your company name to the SUPPORTERS.md and it will get pulled into the website.
 
 ## Have a suggested improvement or fix?

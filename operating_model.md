@@ -1,23 +1,23 @@
-# OpenCompliance Operating Model
+# OpenDSR Operating Model
 
 ## Introduction
-This document defines the operations of the OpenCompliance group, including:
+This document defines the operations of the OpenDSR group, including:
 - Approve changes to the specification via Git pull requests
 - Routinely publish new versions of the specification
 - Convene as a group to make operating model decisions
-- Collaborate towards enriching OpenCompliance resources (wiki, sample code, etc.)
-- Co-champion the OpenCompliance specification towards greater adoption
+- Collaborate towards enriching OpenDSR resources (wiki, sample code, etc.)
+- Co-champion the OpenDSR specification towards greater adoption
 
 ## Roles
-People interact with OpenCompliance via two types participation:
+People interact with OpenDSR via two types participation:
 *Working Group*
-- People who steward and lead the OpenCompliance spec.
-- People who operate the OpenCompliance GitHub repo, publish new versions of the specification, collaborate to promote the specification in-market, etc.
+- People who steward and lead the OpenDSR spec.
+- People who operate the OpenDSR GitHub repo, publish new versions of the specification, collaborate to promote the specification in-market, etc.
 - All community participation is also expected from Working Group members.
 - Active participation is expected from working group members.
 
 *Community*
-- People who implement the OpenCompliance spec to receive and track GDPR data subject requests.
+- People who implement the OpenDSR spec to receive and track GDPR data subject requests.
 - People who ask questions on Github, submit pull requests, contribute to the wiki, etc.
 - Community members may submit Pull requests to add their company and logo to the public site
 
@@ -27,13 +27,13 @@ This is an open specification, there are no limits to who can implement or who c
 - Participants are encouraged to be from product, engineering and privacy/legal/compliance roles as the content is technical.
 
 ### What is expected of working group members?
-The Working Group drives the OpenCompliance initiative:
+The Working Group drives the OpenDSR initiative:
 - Answering GitHub issues and interacting with the community at large
 - Reviewing and commenting on GitHub pull requests
 - Authoring and reviewing Github wiki pages and other resources to help the community
 - Participating in quarterly meetings with other working group members
-- Building support for OpenCompliance into your products
-- Champion the OpenCompliance initiative in your day-to-day discussions
+- Building support for OpenDSR into your products
+- Champion the OpenDSR initiative in your day-to-day discussions
 
 ### How are new working group members added?
 - New members must be proposed and receive 75% support from existing working group members

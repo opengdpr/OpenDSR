@@ -1,10 +1,10 @@
-# OpenCompliance Summary
+# OpenDSR Summary
 
 # Overview
-This is an introductory document intended to provide a summary of OpenCompliance. For full reference details, please see the complete specification at https://www.OpenCompliance.org and https://github.com/OpenCompliance/OpenCompliance.
+This is an introductory document intended to provide a summary of OpenDSR. For full reference details, please see the complete specification at https://www.OpenDSR.org and https://github.com/OpenDSR/OpenDSR.
 
 # Goals and Scope
-The OpenCompliance specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
+The OpenDSR specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
 
 For more information on the Data Subject Rights, see chapter 3 of the GDPR.
 
@@ -57,20 +57,20 @@ The spec supports request types of “erasure”, "access" and “portability”
 ## Endpoints
 This is an overview of available HTTP methods for communicating between Controllers and Processors. The following endpoints should be provided by the Processor (to receive requests from the Controller).
 
-Restful API endpoints for the resource “opencompliance_requests”:
+Restful API endpoints for the resource “opendsr_requests”:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| POST | opencompliance_requests/ | Create a new OpenCompliance request | Yes |
-| GET | opencompliance_requests/{RequestId} | Retrieve status of a single OpenCompliance request | Yes |
-| PUT | opencompliance_requests/{RequestId} | - | No, requests cannot be updated after being created |
-| DELETE | opencompliance_requests/{RequestId} | Cancel an OpenCompliance request | Yes, cancellation is valid in status “pending” only |
+| POST | opendsr_requests/ | Create a new OpenDSR request | Yes |
+| GET | opendsr_requests/{RequestId} | Retrieve status of a single OpenDSR request | Yes |
+| PUT | opendsr_requests/{RequestId} | - | No, requests cannot be updated after being created |
+| DELETE | opendsr_requests/{RequestId} | Cancel an OpenDSR request | Yes, cancellation is valid in status “pending” only |
 
 Non-Restful endpoints:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| GET     | /discovery | Processors describe their OpenCompliance support| Yes  |
+| GET     | /discovery | Processors describe their OpenDSR support| Yes  |
 | POST    | /callback | Sent by Processors when a request status changes| Yes |
 
 
@@ -90,7 +90,7 @@ Refer to the full specification for definitions of objects and fields.
  ],
  "api_version":"1.0",
  "status_callback_urls":[
-   "https://example-controller.com/opencompliance_callbacks"
+   "https://example-controller.com/opendsr_callbacks"
  ]
 }
 ```
