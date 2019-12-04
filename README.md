@@ -61,10 +61,10 @@ Restful API endpoints for the resource “opendsr_requests”:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| POST | opendsr_requests/ | Create a new OpenDSR request | Yes |
-| GET | opendsr_requests/{RequestId} | Retrieve status of a single OpenDSR request | Yes |
-| PUT | opendsr_requests/{RequestId} | - | No, requests cannot be updated after being created |
-| DELETE | opendsr_requests/{RequestId} | Cancel an OpenDSR request | Yes, cancellation is valid in status “pending” only |
+| POST | requests/ | Create a new OpenDSR request | Yes |
+| GET | requests/{RequestId} | Retrieve status of a single OpenDSR request | Yes |
+| PUT | requests/{RequestId} | - | No, requests cannot be updated after being created |
+| DELETE | requests/{RequestId} | Cancel an OpenDSR request | Yes, cancellation is valid in status “pending” only |
 
 Non-Restful endpoints:
 

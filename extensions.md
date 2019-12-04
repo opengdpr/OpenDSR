@@ -6,7 +6,7 @@ OpenDSR requests may contain an `extensions` object, composed of a series of chi
 - Extensions **MUST** not be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
 
-See section the [OpenDSR spec](OpenDSR_specification.md) for more information on the use of extensions.
+See section the [OpenDSR spec](specification.md) for more information on the use of extensions.
 
 ## Published Extensions
 

@@ -81,7 +81,7 @@ The prior name of this framework.
 
   - `/discovery`
   - `/status`
-  - `/opendsr_requests`
+  - `/requests`
 
 ### 3.2.  Protocol Flow
 
@@ -288,12 +288,12 @@ OpenDSR requests **MAY** contain an `extensions` object, composed of a series of
 - Extensions **MUST NOT** be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
 
-[Currently known extensions can be found here](OpenDSR_extensions.md).
+[Currently known extensions can be found here](extensions.md).
 
 ### 7.2.  Example OpenDSR Request
 
 ```http
-POST /OpenDSR_requests HTTP/1.1
+POST /requests HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 Content-Type: application/json
@@ -311,7 +311,7 @@ Content-Type: application/json
   ],
   "api_version": "1.0",
   "status_callback_urls": [
-    "https://examplecontroller.com/OpenDSR_callbacks"
+    "https://examplecontroller.com/opendsr_callbacks"
   ],
   "extensions": {
     "example-processor.com": {
@@ -460,7 +460,7 @@ OpenDSR endpoints **MUST** be queryable for request status via an HTTP GET for t
 ### 8.2.  Example Status Request
 
 ```http
-GET /OpenDSR_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
+GET /requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 ```
@@ -603,7 +603,7 @@ The callback body **MUST** include the following parameters:
 ### 8.7. Callback Request Example
 
 ```http
-POST /OpenDSR_callbacks HTTP/1.1
+POST /opendsr_callbacks HTTP/1.1
 Host: examplecontroller.com
 Content-Type: application/json
 X-OpenDSR-Processor-Domain: example-processor.com
@@ -621,7 +621,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
-    "status_callback_url":"https://examplecontroller.com/OpenDSR_callbacks",
+    "status_callback_url":"https://examplecontroller.com/opendsr_callbacks",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
     "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
@@ -647,7 +647,7 @@ OpenDSR endpoints **MUST** accept request cancellations via an HTTP DELETE for t
 ### 9.1.  Example Cancellation Request
 
 ```http
-DELETE /OpenDSR_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
+DELETE /requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 ```
