@@ -311,7 +311,7 @@ Content-Type: application/json
   ],
   "api_version": "1.0",
   "status_callback_urls": [
-    "https://examplecontroller.com/opendsr_callbacks"
+    "https://examplecontroller.com/opendsr/callbacks"
   ],
   "extensions": {
     "example-processor.com": {
@@ -603,7 +603,7 @@ The callback body **MUST** include the following parameters:
 ### 8.7. Callback Request Example
 
 ```http
-POST /opendsr_callbacks HTTP/1.1
+POST /opendsr/callbacks HTTP/1.1
 Host: examplecontroller.com
 Content-Type: application/json
 X-OpenDSR-Processor-Domain: example-processor.com
@@ -621,7 +621,7 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
-    "status_callback_url":"https://examplecontroller.com/opendsr_callbacks",
+    "status_callback_url":"https://examplecontroller.com/opendsr/callbacks",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
     "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
