@@ -1,11 +1,10 @@
-# OpenGDPR Summary
-version 1.0
+# OpenDSR Summary
 
 # Overview
-This is an introductory document intended to provide a summary of OpenGDPR. For full reference details, please see the complete specification at https://www.opengdpr.org and https://github.com/opengdpr/opengdpr.
+This is an introductory document intended to provide a summary of OpenDSR. For full reference details, please see the complete specification at https://www.OpenDSR.org and https://github.com/OpenDSR/OpenDSR. This project was formerly known as OpenGDPR and existed at https://www.OpenGDPR.org and https://github.com/OpeGDPR/OpenGDPR.
 
 # Goals and Scope
-The OpenGDPR specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
+The OpenDSR specification defines a common approach for data Controllers and Processors to build interoperable systems for tracking and fulfilling Data Subject requests as defined under the General Data Protection Regulation (GDPR).
 
 For more information on the Data Subject Rights, see chapter 3 of the GDPR.
 
@@ -58,20 +57,20 @@ The spec supports request types of “erasure”, "access" and “portability”
 ## Endpoints
 This is an overview of available HTTP methods for communicating between Controllers and Processors. The following endpoints should be provided by the Processor (to receive requests from the Controller).
 
-Restful API endpoints for the resource “opengdpr_requests”:
+Restful API endpoints for the resource “opendsr_requests”:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| POST | opengdpr_requests/ | Create a new OpenGDPR request | Yes |
-| GET | opengdpr_requests/{RequestId} | Retrieve status of a single OpenGDPR request | Yes |
-| PUT | opengdpr_requests/{RequestId} | - | No, requests cannot be updated after being created |
-| DELETE | opengdpr_requests/{RequestId} | Cancel an OpenGDPR request | Yes, cancellation is valid in status “pending” only |
+| POST | requests/ | Create a new OpenDSR request | Yes |
+| GET | requests/{RequestId} | Retrieve status of a single OpenDSR request | Yes |
+| PUT | requests/{RequestId} | - | No, requests cannot be updated after being created |
+| DELETE | requests/{RequestId} | Cancel an OpenDSR request | Yes, cancellation is valid in status “pending” only |
 
 Non-Restful endpoints:
 
 | HTTP Method | Path | Description | Supported? |
 | --- | --- | --- | --- |
-| GET     | /discovery | Processors describe their OpenGDPR support| Yes  |
+| GET     | /discovery | Processors describe their OpenDSR support| Yes  |
 | POST    | /callback | Sent by Processors when a request status changes| Yes |
 
 
@@ -91,7 +90,7 @@ Refer to the full specification for definitions of objects and fields.
  ],
  "api_version":"1.0",
  "status_callback_urls":[
-   "https://example-controller.com/opengdpr_callbacks"
+   "https://example-controller.com/opendsr_callbacks"
  ]
 }
 ```

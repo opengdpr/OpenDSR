@@ -1,6 +1,6 @@
-# OpenGDPR
+# OpenDSR
 
-An open specification for data subject request management.
+An open specification for data subject request management, formerly called OpenGDPR.
 
 ### Version 1.0
 
@@ -21,13 +21,13 @@ legislation](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32016
 ## 1. Introduction
 
 This specification is intended to:
-- Provide a well defined JSON specification that allows Controllers and Processors to communicate and
+- Provide a well defined JSON specification that allows Controllers/businesses and Processors/vendor to communicate and
 manage Data Subject access, portability and erasure requests in a uniform and scalable
 manner.
 - Provide strong cryptographic verification of request receipts to provide chain of
 processing assurance and demonstrate accountability to regulatory authorities (Article
 5.2).
-- Provide for a callback mechanism to enable Controllers to identify the status of
+- Provide for a callback mechanism to enable Controllers & Businesses to identify the status of
 all Data Subject requests.
 
 This specification does not cover:
@@ -48,6 +48,7 @@ interpreted as described in [RFC2119](https://tools.ietf.org/html/rfc2119).
 
 
 ## 2. Terms and Definitions
+This document retains much of the language from it's origins as a GDPR DSR framework and has not been fully translated to be  fully regulation neutral.
 
 #### Data Subject Request
 
@@ -55,21 +56,24 @@ A request from a Data Subject exercising their Data Subject Rights as defined wi
 
 #### Fulfillment
 
-Enacting compliance related activities to honor an OpenGDPR request.
+Enacting compliance related activities to honor an OpenDSR request.
 
-## 3. OpenGDPR Basics
+#### OpenGDPR
+The prior name of this framework.
+
+## 3. OpenDSR Basics
 
 ### 3.1. Roles and Responsibilities
 
 #### Data Subject
 
-  A European Union resident whose personal data is being processed.
+  The individual person to whom the data subject request pertains; A European Union resident whose personal data is being processed (GDPR) or a resident of California (CCPA).
 
-#### Data Controller
+#### Data Controller (GDPR) / Business (CCPA)
 
   An entity which makes the decision about what personal data  will be processed and the types of processing that will be done with respect to that personal data. The Data Controller receives Data Subject requests from the Data Subjects and validates them. The Data Controller **SHOULD** provide a callback endpoint. The Data Controller **SHOULD** verify response signatures. Referenced as "Controller."
 
-#### Data Processor
+#### Data Processor (GDPR) / Vendor (CCPA)
 
   The organization that processes data pursuant to the instructions of the Controller on behalf of the Controller. The Data Processor receives data subject requests via RESTful endpoints and is responsible for fulfilling requests. The Data Processor **MUST** provide a signed response to requests. The Data Processor **MUST** honor callbacks.  Data Processors **MUST** honor callbacks included in requests.
 
@@ -77,7 +81,7 @@ Enacting compliance related activities to honor an OpenGDPR request.
 
   - `/discovery`
   - `/status`
-  - `/opengdpr_requests`
+  - `/requests`
 
 ### 3.2.  Protocol Flow
 
@@ -101,7 +105,7 @@ widespread deployment and known security vulnerabilities. Implementations **MAY*
 ### 3.4. Versions
 This spec will be released by major and minor increments using semantic versioning. Breaking changes will be pushed in major branches. More info is available here: https://semver.org/.
 
-URLs **MUST** include the major version number at the start, for example: https://opengdpr.processor.com/v1/discovery.
+URLs **MUST** include the major version number at the start, for example: https://opendsr.processor.com/v1/discovery.
 
 Resources **MAY** include the major and minor version in the "api_version" field, examples shown below.
 
@@ -120,11 +124,11 @@ Signature Standard FIPS PUB 186-4: https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.F
 
 ### 4.3.  Authentication
 
-API authentication for OpenGDPR requests is out of scope for this document, and is left to the Processor to implement. Callbacks **MUST** be authenticated by a digital signature issued by the certificate detailed in section 4.1.
+API authentication for OpenDSR requests is out of scope for this document, and is left to the Processor to implement. Callbacks **MUST** be authenticated by a digital signature issued by the certificate detailed in section 4.1.
 
 ## 5. Identities
 
-The identity types and schema documented below are reused throughout all OpenGDPR API contracts.
+The identity types and schema documented below are reused throughout all OpenDSR API contracts.
 
 ### 5.1.  Identity Type Keys
 
@@ -157,8 +161,8 @@ sha256
 
 ### 5.3. Identity Object
 
-An OpenGDPR request **MAY** contain one or more Identity objects used to fulfill the request.
-The identity object is **REQUIRED** unless identities are present in an extension object, see section 7.1.2 
+An OpenDSR request **MAY** contain one or more Identity objects used to fulfill the request.
+The identity object is **REQUIRED** unless identities are present in an extension object, see section 7.1.2
 An Identity object contains the following properties:
 
 - `identity_type`
@@ -173,9 +177,9 @@ An Identity object contains the following properties:
 
   **REQUIRED** string value representing the encoding of the identity. Supported values: See section 5.2.
 
-## 6. OpenGDPR Discovery
+## 6. OpenDSR Discovery
 
-OpenGDPR service implementations **MUST** provide an endpoint that describes their support for the OpenGDPR specification via HTTP GET.
+OpenDSR service implementations **MUST** provide an endpoint that describes their support for the OpenDSR specification via HTTP GET.
 
 ## 6.1.  Example Discovery Request
 
@@ -199,7 +203,7 @@ erasure
 
 `api_version`
 
-  **REQUIRED** version string representing the supported version of the OpenGDPR API.
+  **REQUIRED** version string representing the supported version of the OpenDSR API.
 
  `supported_identities`
 
@@ -211,7 +215,7 @@ erasure
 
 `processor_certificate`
 
-  **REQUIRED** HTTP endpoint x.509 where certificate used to sign callbacks and OpenGDPR API responses can be downloaded. The domain **MUST** match that of the discovery callback.
+  **REQUIRED** HTTP endpoint x.509 where certificate used to sign callbacks and OpenDSR API responses can be downloaded. The domain **MUST** match that of the discovery callback.
 
 ### 6.4.  Example Discovery Response
 
@@ -238,11 +242,15 @@ Content-Type: application/json
 }
 ```
 
-## 7. OpenGDPR Request
+## 7. OpenDSR Request
 
-### 7.1.1 OpenGDPR Request Properties
+### 7.1.1 OpenDSR Request Properties
 
-OpenGDPR service implementations **MUST** provide an endpoint that creates OpenGDPR JSON requests via HTTP POST. Controllers **MUST** submit requests with the following parameters:
+OpenDSR service implementations **MUST** provide an endpoint that creates OpenDSR JSON requests via HTTP POST. Controllers **MUST** submit requests with the following parameters:
+
+`regulation`
+
+  **REQUIRED** string value representing the regulation that this request is covered by: 'gdpr' or 'ccpa' are currently supported.
 
 `subject_request_id`
 
@@ -250,7 +258,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `subject_request_type`
 
-  **REQUIRED** string value representing the type of OpenGDPR Request. Supported values: "erasure", "portability", "access"
+  **REQUIRED** string value representing the type of OpenDSR Request. Supported values: "erasure", "portability", "access"
 
 `subject_identities`
 
@@ -262,7 +270,7 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 `api_version`
 
-  **OPTIONAL** Version string representing the desired version of the OpenGDPR API.
+  **OPTIONAL** Version string representing the desired version of the OpenDSR API.
 
 `status_callback_urls`
 
@@ -274,18 +282,18 @@ OpenGDPR service implementations **MUST** provide an endpoint that creates OpenG
 
 #### 7.1.2 Extensions
 
-OpenGDPR requests **MAY** contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
+OpenDSR requests **MAY** contain an `extensions` object, composed of a series of child-objects, keyed by a processor domain.
 
-- The domain of each extension **MUST** match the processor's OpenGDPR domain, matching the `X-OpenGDPR-Processor-Domain` header in OpenGDPR responses.
+- The domain of each extension **MUST** match the processor's OpenDSR domain, matching the `X-OpenDSR-Processor-Domain` header in OpenDSR responses.
 - Extensions **MUST NOT** be used for or contain authentication information.
 - Processors **MUST** only implement an extension for items that do not already fit into the generic spec.
 
-[Currently known extensions can be found here](OpenGDPR_extensions.md).
+[Currently known extensions can be found here](extensions.md).
 
-### 7.2.  Example OpenGDPR Request
+### 7.2.  Example OpenDSR Request
 
 ```http
-POST /opengdpr_requests HTTP/1.1
+POST /requests HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 Content-Type: application/json
@@ -303,7 +311,7 @@ Content-Type: application/json
   ],
   "api_version": "1.0",
   "status_callback_urls": [
-    "https://examplecontroller.com/opengdpr_callbacks"
+    "https://examplecontroller.com/opendsr/callbacks"
   ],
   "extensions": {
     "example-processor.com": {
@@ -318,9 +326,9 @@ Content-Type: application/json
 ```
 
 
-### 7.3.  OpenGDPR Response Properties
+### 7.3.  OpenDSR Response Properties
 
-For well formed requests, the OpenGDPR service **MUST** respond with HTTP status
+For well formed requests, the OpenDSR service **MUST** respond with HTTP status
 code 201 and it **MUST** include the following parameters:
 
 `controller_id`
@@ -337,23 +345,23 @@ code 201 and it **MUST** include the following parameters:
 
 `encoded_request`
 
-  **REQUIRED** Base64 encoding of the entire body of the OpenGDPR request. Controllers **MUST NOT** log or store this.
+  **REQUIRED** Base64 encoding of the entire body of the OpenDSR request. Controllers **MUST NOT** log or store this.
 
 `subject_request_id`
 
-  **REQUIRED** UUID v4 string from the originating OpenGDPR request.
+  **REQUIRED** UUID v4 string from the originating OpenDSR request.
 
 `processor_signature`
 
   **REQUIRED** Base64 encoded signature of the SHA 256 digest of the body of the response.
 
-### 7.4.  Example OpenGDPR Response
+### 7.4.  Example OpenDSR Response
 
 ```http
 HTTP/1.1 201 Created
 Content-Type: application/json
-X-OpenGDPR-Processor-Domain: example-processor.com
-X-OpenGDPR-Signature:
+X-OpenDSR-Processor-Domain: example-processor.com
+X-OpenDSR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
 F2pbuoPuK2diHOixxLj6+t97q0nZM7u3wmgkwF9EHIo3C6G1SI04/odvyY/VdMZgj3H1fLnz+X5rc42/
@@ -373,9 +381,9 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 }
 ```
 
-### 7.5.  OpenGDPR Error Response Properties
+### 7.5.  OpenDSR Error Response Properties
 
-For errors, the OpenGDPR service **MUST** respond with HTTP status code 400 and
+For errors, the OpenDSR service **MUST** respond with HTTP status code 400 and
 **SHOULD** include the following parameters:
 
 `error`
@@ -400,7 +408,7 @@ authentication.
 
   **OPTIONAL** array of the error detail objects including the following fields: "message" "domain", "reason".
 
-## 7.7.  Example OpenGDPR Error Response
+## 7.7.  Example OpenDSR Error Response
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -423,12 +431,12 @@ Pragma: no cache
 }
 ```
 
-## 8. OpenGDPR Status
+## 8. OpenDSR Status
 
-OpenGDPR requests **MUST** have an associated status. The following request statuses
+OpenDSR requests **MUST** have an associated status. The following request statuses
 are supported:
 
- `pending`
+`pending`
 
  Indicates that a well formed request has been received by the Processor.
 
@@ -446,13 +454,13 @@ Indicates that a request has been cancelled.
 
 ### 8.1.  Request Status Endpoint
 
-OpenGDPR endpoints **MUST** be queryable for request status via an HTTP GET for the
+OpenDSR endpoints **MUST** be queryable for request status via an HTTP GET for the
 `subject_request_id`.
 
 ### 8.2.  Example Status Request
 
 ```http
-GET /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
+GET /requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 ```
@@ -461,16 +469,16 @@ Accept: application/json
 
 The Status response **MUST** include the following headers:
 
-`X-OpenGDPR-Processor-Domain`
+`X-OpenDSR-Processor-Domain`
 
   **REQUIRED** header representing the domain for which the signing
   certificate is issued. The domain name **MUST** match the domain on which
-  OpenGDPR requests are received.
+  OpenDSR requests are received.
 
-`X-OpenGDPR-Signature`
+`X-OpenDSR-Signature`
 
   **REQUIRED** header Base64 encoded signature generated by a certificate
-  matching the domain in the `X-OpenGDPR-Processor-Domain` header.
+  matching the domain in the `X-OpenDSR-Processor-Domain` header.
 
 The Status body **MUST** include the following properties:
 
@@ -486,7 +494,7 @@ The Status body **MUST** include the following properties:
 
 `subject_request_id`
 
-  **REQUIRED** UUID v4 string matching the original OpenGDPR request.
+  **REQUIRED** UUID v4 string matching the original OpenDSR request.
 
 `request_status`
 
@@ -494,20 +502,23 @@ The Status body **MUST** include the following properties:
 
 `api_version`
 
-  **OPTIONAL** Version string representing the desired version of the OpenGDPR API
+  **OPTIONAL** Version string representing the desired version of the OpenDSR API
 
 `results_url`
 
   **OPTIONAL** A valid URL where the results of the request are available.
 
+`results_count`
+
+  **OPTIONAL** A count of results found when fulfilling this request.
 
 ### 8.4.  Example Status Response
 
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/json
-X-OpenGDPR-Processor-Domain: example-processor.com
-X-OpenGDPR-Signature:
+X-OpenDSR-Processor-Domain: example-processor.com
+X-OpenDSR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
 F2pbuoPuK2diHOixxLj6+t97q0nZM7u3wmgkwF9EHIo3C6G1SI04/odvyY/VdMZgj3H1fLnz+X5rc42/
@@ -524,13 +535,14 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
     "api_version":"1.0",
-    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
+    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
+    "results_count":103
 }
 ```
 
 ### 8.5. Request Status Callback
 
-OpenGDPR requests **SHOULD** contain `status_callback_urls` (see section 7.1). The
+OpenDSR requests **SHOULD** contain `status_callback_urls` (see section 7.1). The
 following rules govern their use:
    - All included callbacks **MUST** be invoked by the Processor on request state
   change.
@@ -545,16 +557,16 @@ following rules govern their use:
 
 Callbacks **MUST** include the following headers:
 
-`X-OpenGDPR-Processor-Domain`
+`X-OpenDSR-Processor-Domain`
 
   **REQUIRED** header representing the domain for which the signing
   certificate is issued. The domain name **MUST** match the domain on which
-  OpenGDPR requests are received.
+  OpenDSR requests are received.
 
-`X-OpenGDPR-Signature`
+`X-OpenDSR-Signature`
 
   **REQUIRED** header Base64 encoded signature generated by a certificate
-  matching the domain in the X-OpenGDPR-Processor-Domain header.
+  matching the domain in the X-OpenDSR-Processor-Domain header.
 
 The callback body **MUST** include the following parameters:
 
@@ -565,11 +577,11 @@ The callback body **MUST** include the following parameters:
 
 `status_callback_url`
 
-  **REQUIRED** string matching the callback URL from the OpenGDPR request, see section 8.
+  **REQUIRED** string matching the callback URL from the OpenDSR request, see section 8.
 
 `subject_request_id`
 
-  **REQUIRED** UUID v4 string matching the original OpenGDPR request.
+  **REQUIRED** UUID v4 string matching the original OpenDSR request.
 
 `request_status`
 
@@ -583,14 +595,19 @@ The callback body **MUST** include the following parameters:
 
   **OPTIONAL** A valid URL where the results of the request are available.
 
+`results_count`
+
+  **OPTIONAL** A count of results found when fulfilling this request.
+
+
 ### 8.7. Callback Request Example
 
 ```http
-POST /opengdpr_callbacks HTTP/1.1
+POST /opendsr/callbacks HTTP/1.1
 Host: examplecontroller.com
 Content-Type: application/json
-X-OpenGDPR-Processor-Domain: example-processor.com
-X-OpenGDPR-Signature:
+X-OpenDSR-Processor-Domain: example-processor.com
+X-OpenDSR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
 F2pbuoPuK2diHOixxLj6+t97q0nZM7u3wmgkwF9EHIo3C6G1SI04/odvyY/VdMZgj3H1fLnz+X5rc42/
@@ -604,38 +621,39 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 {
     "controller_id":"example_controller_id",
     "expected_completion_time":"2018-11-01T15:00:01Z",
-    "status_callback_url":"https://examplecontroller.com/opengdpr_callbacks",
+    "status_callback_url":"https://examplecontroller.com/opendsr/callbacks",
     "subject_request_id":"a7551968-d5d6-44b2-9831-815ac9017798",
     "request_status":"pending",
-    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345"
+    "results_url":"https://exampleprocessor.com/secure/d188d4ba-12db-48a0-898c-cd0f8ba7b345",
+    "results_count":340
 }
 ```
 
 ### 8.8. Callback Authentication
 
 In order to authenticate a callback, a Party **SHOULD** perform the following actions:
-1. Read the X-OpenGDPR-Processor-Domain request header.
+1. Read the X-OpenDSR-Processor-Domain request header.
 2. Fetch the public key from a cache based on identity.
 3. If not present in cache, make a call to /discovery of the caller and cache the public key.  The Party performing authentication **MAY** whitelist allowed
 endpoints.
-4. Validate that the signature in the X-OpenGDPR-Signature header is valid for the body of the request.  The Party **SHOULD** NOT parse the payload until the signature
+4. Validate that the signature in the X-OpenDSR-Signature header is valid for the body of the request.  The Party **SHOULD** NOT parse the payload until the signature
 has been validated, but rather pass the raw contents into the signature validation function.
 5. Return 403 if validation fails.
 6. Verify the status_callback_url matches the Party's own endpoint. Return if this check fails.
 
 ## 9.  Cancellation Endpoint
-OpenGDPR endpoints **MUST** accept request cancellations via an HTTP DELETE for the subject_request_id. OpenGDPR requests **MAY** be cancelled by the Controller while in status "pending".
+OpenDSR endpoints **MUST** accept request cancellations via an HTTP DELETE for the subject_request_id. OpenDSR requests **MAY** be cancelled by the Controller while in status "pending".
 
 ### 9.1.  Example Cancellation Request
 
 ```http
-DELETE /opengdpr_requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
+DELETE /requests/a7551968-d5d6-44b2-9831-815ac9017798 HTTP/1.1
 Host: example-processor.com
 Accept: application/json
 ```
 
 ### 9.2.  Cancellation Response Properties
-For well formed requests, the OpenGDPR service **MUST** respond with HTTP status
+For well formed requests, the OpenDSR service **MUST** respond with HTTP status
 code 202, and the following parameters:
 
 `controller_id`
@@ -649,7 +667,7 @@ code 202, and the following parameters:
 
 `subject_request_id`
 
-  **REQUIRED** UUID v4 string from the originating OpenGDPR request.
+  **REQUIRED** UUID v4 string from the originating OpenDSR request.
 
 `processor_signature`
 
@@ -658,17 +676,17 @@ code 202, and the following parameters:
 
 `api_version`
 
-  **OPTIONAL** Version string representing the desired version of the OpenGDPR
+  **OPTIONAL** Version string representing the desired version of the OpenDSR
   API.
 
 
-### 9.3.  Example OpenGDPR Cancellation Response
+### 9.3.  Example OpenDSR Cancellation Response
 
 ```http
 HTTP/1.1 202 Accepted
 Content-Type: application/json
-X-OpenGDPR-Processor-Domain: example-processor.com
-X-OpenGDPR-Signature:
+X-OpenDSR-Processor-Domain: example-processor.com
+X-OpenDSR-Signature:
 kiGlog3PdQx+FQmB8wYwFC1fekbJG7Dm9WdqgmXc9uKkFRSM4uPzylLi7j083461xLZ+mUloo3tpsmyI
 Zpt5eMfgo7ejXPh6lqB4ZgCnN6+1b6Q3NoNcn/+11UOrvmDj772wvg6uIAFzsSVSjMQxRs8LAmHqFO4c
 F2pbuoPuK2diHOixxLj6+t97q0nZM7u3wmgkwF9EHIo3C6G1SI04/odvyY/VdMZgj3H1fLnz+X5rc42/
@@ -691,9 +709,12 @@ KD/4Axmo9DISib5/7A6uczJxQG2Bcrdj++vQqK2succ=
 
 All Parties **MUST** make best efforts to not throttle during normal operation.
 
-Controllers **MAY** use a sub-processor to manage their OpenGDPR request infrastructure
+Controllers **MAY** use a sub-processor to manage their OpenDSR request infrastructure
 to ensure requests are distributed reliably, security signatures are verified and
 thorough logs are kept.
+
+## 10.1 Migration from OpenGDPR
+To maintain backwards compatibility with the name OpenGDPR, all parties are **MUST** honor the prior versions named routes and headers.
 
 ## 11.   Security Considerations
 
