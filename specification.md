@@ -2,7 +2,7 @@
 
 An open specification for data subject request management, formerly called OpenGDPR.
 
-### Version 1.0
+### Version 2.0
 
 ### Abstract
 
