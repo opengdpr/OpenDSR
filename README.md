@@ -91,7 +91,7 @@ Refer to the full specification for definitions of objects and fields.
       "identity_format":"raw"
    }
  ],
- "api_version":"1.0",
+ "api_version":"2.0",
  "status_callback_urls":[
    "https://example-controller.com/opendsr/callbacks"
  ]
