@@ -17,7 +17,7 @@ Domain: `opendsr.mparticle.com`
 Supported keys:
 
 - `mpids`: An array of mParticle IDs. The mParticle ID is a 64-bit signed integer.
-- `identities`: An array of additional mParticle-supported identity objects, each containing a key and value. Valid keys are:
+- `identities`: An array of additional mParticle-supported identity objects, each containing a key and value. Both keys and values in this object are strings. Valid keys are:
   - `other`: mParticle ID `other`.
   - `other2`: mParticle ID `other2`.
   - `other3`: mParticle ID `other3`.
